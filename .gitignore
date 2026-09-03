@@ -1,0 +1,20 @@
+# Виртуальное окружение
+.venv/
+venv/
+
+# Секреты
+.env
+
+# Данные выполнения
+storage/
+*.tmp
+
+# Кэш Python
+__pycache__/
+*.pyc
+
+# Кэш pytest
+.pytest_cache/
+
+# Внутренние файлы ZCode
+.zcode/
