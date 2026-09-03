@@ -128,7 +128,13 @@ def _format_feedback(exercise: Exercise, result: AttemptResult,
         lines.append("")
         lines.append(f"📌 {html.quote(exercise.note)}")
     lines.append("")
-    if result.perfect:
+    if not exercise.conflictogens:
+        # Контрольный пример: конфликтогенов в фразе нет.
+        if result.perfect:
+            lines.append("🎉 Верно: в этой фразе нет конфликтогенов.")
+        else:
+            lines.append("🚫 В этой фразе не было конфликтогенов — отмечать ничего не нужно было.")
+    elif result.perfect:
         lines.append("🎉 Отлично! Все конфликтогены найдены.")
     else:
         lines.append(f"📈 Счёт: <b>{result.score_num} из {result.score_den}</b>")

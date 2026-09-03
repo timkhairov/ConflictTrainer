@@ -151,11 +151,13 @@ def load_exercises(path: Path, known_ids: set[str]) -> list[Exercise]:
         _check_len(phrase, PHRASE_MAX_LEN, ctx, "phrase")
 
         cogs_raw = item.get("conflictogens")
-        if not isinstance(cogs_raw, list) or not cogs_raw:
+        if not isinstance(cogs_raw, list):
             raise DataError(
-                f"exercises[{i - 1}] (id={eid}): нужен непустой список conflictogens"
+                f"exercises[{i - 1}] (id={eid}): поле \"conflictogens\" должно быть списком "
+                f"(пустой список допустим — контрольный пример без конфликтогенов)"
             )
-        # Убираем дубликаты, сохраняя порядок
+        # Убираем дубликаты, сохраняя порядок. Пустой список — валидный
+        # контрольный пример: фраза без зашитых конфликтогенов.
         cogs = list(dict.fromkeys(str(c).strip() for c in cogs_raw))
         unknown = [c for c in cogs if c not in known_ids]
         if unknown:

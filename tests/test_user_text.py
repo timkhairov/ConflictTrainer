@@ -69,6 +69,18 @@ def test_snippet_escapes_after_truncation_never_splits_entity():
 # --- _best_lines ---
 
 
+def test_best_lines_skips_clean_exercises():
+    # чистая фраза (пустые conflictogens) — «лучший счёт» 0/0 не показываем
+    exercises_by_id = {
+        1: Exercise(id=1, phrase="p1", conflictogens=("a",)),
+        2: Exercise(id=2, phrase="p2", conflictogens=()),
+    }
+    lines = st._best_lines({"1": 1, "2": 0}, exercises_by_id)
+    assert len(lines) == 1
+    assert "0/0" not in lines[0]
+    assert lines[0].endswith("1/1")
+
+
 def test_best_lines_snippet_score_and_no_number():
     exercises_by_id = {
         1: Exercise(id=1, phrase="короткая фраза", conflictogens=("a", "b")),
@@ -108,6 +120,30 @@ def test_feedback_header_number_free_and_phrase_kept():
     assert "Упражнение" not in text
     assert "7" not in text
     assert "Фраза: твоя фраза" in text
+
+
+def test_feedback_clean_perfect():
+    # контрольный пример, всё верно (ничего не отмечено)
+    exercise = Exercise(id=10, phrase="чистая фраза", conflictogens=(), note="разбор")
+    by_id = {"a": Conflictogen(id="a", name="Н", description="деск")}
+    result = ex.evaluate(exercise, [])
+    text = ex._format_feedback(exercise, result, by_id)
+    assert "нет конфликтогенов" in text
+    assert "📌 разбор" in text
+    assert "Счёт" not in text
+    assert "Все конфликтогены найдены" not in text
+
+
+def test_feedback_clean_false_positives():
+    # контрольный пример, но пользователь отметил лишнее
+    exercise = Exercise(id=11, phrase="чистая фраза", conflictogens=(), note="")
+    by_id = {"a": Conflictogen(id="a", name="Н", description="деск")}
+    result = ex.evaluate(exercise, ["a"])
+    text = ex._format_feedback(exercise, result, by_id)
+    assert "Лишние" in text
+    assert "Н" in text
+    assert "не было конфликтогенов" in text
+    assert "0 из 0" not in text
 
 
 # --- _begin ---

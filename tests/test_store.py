@@ -51,6 +51,20 @@ def test_record_attempt_increments_and_accumulates(tmp_path):
     assert st["best"] == {"1": 3}  # best хранит максимум
 
 
+def test_record_attempt_zero_score_clean_exercise(tmp_path):
+    # контрольный пример (0/0): попытка фиксируется, «лучший счёт» не записывается
+    s = Store(_path(tmp_path))
+    s.record_attempt(1, 42, 0, 0)
+    s.record_attempt(1, 42, 0, 0)
+    st = s.stats(1)
+    assert st["attempts"] == 2
+    assert st["total_correct"] == 0
+    assert st["total_possible"] == 0
+    assert st["accuracy"] is None
+    assert st["completed"] == [42]
+    assert st["best"] == {}
+
+
 def test_completed_dedupes(tmp_path):
     s = Store(_path(tmp_path))
     s.record_attempt(1, 7, 1, 1)

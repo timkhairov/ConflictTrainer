@@ -41,7 +41,9 @@ def _load_ex(tmp_path, items, known):
 def test_load_all_real_data():
     conflictogens, exercises = load_all(DATA_DIR)
     assert len(conflictogens) == 7
-    assert len(exercises) == 24
+    assert len(exercises) == 88
+    assert [e.id for e in exercises] == list(range(1, 89))
+    assert exercises[-1].conflictogens == ()  # контрольный пример
     ids = {c.id for c in conflictogens}
     for e in exercises:
         for cid in e.conflictogens:
@@ -184,6 +186,23 @@ def test_exercise_unknown_conflictogen_rejected(tmp_path):
 def test_exercise_empty_list_rejected(tmp_path):
     with pytest.raises(DataError):
         _load_ex(tmp_path, [], {"a", "b"})
+
+
+def test_exercise_empty_conflictogens_accepted(tmp_path):
+    # пустой список conflictogens — контрольный пример (фразы без конфликтогенов)
+    result = _load_ex(tmp_path, [{"id": 1, "phrase": "x", "conflictogens": []}], {"a", "b"})
+    assert len(result) == 1
+    assert result[0].conflictogens == ()
+
+
+def test_exercise_missing_conflictogens_rejected(tmp_path):
+    with pytest.raises(DataError):
+        _load_ex(tmp_path, [{"id": 1, "phrase": "x"}], {"a", "b"})
+
+
+def test_exercise_conflictogens_non_list_rejected(tmp_path):
+    with pytest.raises(DataError):
+        _load_ex(tmp_path, [{"id": 1, "phrase": "x", "conflictogens": "a"}], {"a", "b"})
 
 
 def test_exercise_id_float_rejected(tmp_path):

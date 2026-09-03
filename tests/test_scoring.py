@@ -62,6 +62,29 @@ def test_false_positives():
     assert not r.perfect
 
 
+def test_clean_exercise_empty_selection_perfect():
+    # контрольный пример: конфликтогенов нет, выбирать нечего
+    e = Exercise(id=10, phrase="p", conflictogens=(), note="")
+    r = evaluate(e, [])
+    assert r.perfect
+    assert r.score_num == 0
+    assert r.score_den == 0
+    assert r.correct == ()
+    assert r.missed == ()
+    assert r.false_positive == ()
+
+
+def test_clean_exercise_selection_all_false_positive():
+    e = Exercise(id=11, phrase="p", conflictogens=(), note="")
+    r = evaluate(e, ["a"])
+    assert not r.perfect
+    assert r.score_num == 0
+    assert r.score_den == 0
+    assert r.correct == ()
+    assert r.missed == ()
+    assert r.false_positive == ("a",)
+
+
 def test_mixed_case_scores():
     e = Exercise(id=3, phrase="p", conflictogens=("a", "b", "c", "d"), note="")
     r = evaluate(e, ["a", "c", "x"])

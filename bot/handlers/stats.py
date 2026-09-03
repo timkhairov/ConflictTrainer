@@ -52,6 +52,8 @@ def _best_lines(best: dict[str, int], exercises_by_id: dict[int, Exercise]) -> l
         exercise = exercises_by_id.get(eid)
         if exercise is None:
             continue
+        if not exercise.conflictogens:
+            continue  # чистая фраза: «лучший счёт» не определён (0/0 не показываем)
         snippet = _phrase_snippet(exercise.phrase)
         lines.append((eid, f"  • «{snippet}» — {score}/{len(exercise.conflictogens)}"))
     lines.sort(key=lambda item: item[0])
