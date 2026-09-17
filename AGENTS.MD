@@ -2,7 +2,7 @@
 
 This project uses a multi-agent software development workflow.
 
-The PRIMARY ZCode agent acts as the **ORCHESTRATOR**.
+The main agent for this project is subagent @orchestrator.
 
 The orchestrator coordinates specialist agents and owns the overall development process. It should delegate specialist work rather than performing implementation itself.
 
@@ -187,7 +187,7 @@ If the Documenter discovers a probable implementation problem, it should report 
 
 # Orchestrator
 
-The PRIMARY ZCode agent is the Orchestrator.
+The @orchestrator subagent is the Orchestrator.
 
 The Orchestrator owns the lifecycle of each development task.
 

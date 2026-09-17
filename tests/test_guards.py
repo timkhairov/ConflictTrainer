@@ -176,7 +176,7 @@ def test_cb_stats_not_modified_swallowed_and_answered(tmp_path):
                                message="Bad Request: message is not modified"),
     )
     call = FakeCall(message=msg, data="menu:stats")
-    run(st.cb_stats(call, store, {}))  # не должно выбрасывать
+    run(st.cb_stats(call, store, []))  # не должно выбрасывать
     assert len(call.answered) == 1
 
 
@@ -189,6 +189,6 @@ def test_cb_stats_other_error_answered_and_re_raised(tmp_path):
     )
     call = FakeCall(message=msg, data="menu:stats")
     with pytest.raises(TelegramBadRequest):
-        run(st.cb_stats(call, store, {}))
+        run(st.cb_stats(call, store, []))
     # текущее поведение: перед re-raise отвечает ERROR_ANSWER ровно один раз
     assert len(call.answered) == 1

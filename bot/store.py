@@ -13,7 +13,7 @@ import os
 import threading
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Sequence
 
 log = logging.getLogger(__name__)
 
@@ -21,22 +21,24 @@ _DEFAULTS: dict[str, Any] = {
     "attempts": 0,
     "total_correct": 0,
     "total_possible": 0,
-    "completed": [],  # list[int] — id упражнений, которые пользователь уже проходил
-    "best": {},       # dict[str, int] — exercise_id(str) -> лучший score_num
+    "completed": [],    # list[int] — id упражнений, которые пользователь уже проходил
+    "conflictogens": {},  # dict[str, dict[str, int]] — id конфликтогена ->
+    # {present, correct, false_positive}: сколько раз появлялся / верно
+    # найден / помечен лишним
 }
 
 
 # --- нормализация записи пользователя (защита от повреждённого JSON) ---
 
 def _coerce_int(value: Any, default: int = 0) -> int:
-    """Целое число; bool и нечисловые значения → default (вместо падения)."""
+    """Целое число; bool, нечисловые значения и бесконечность → default (вместо падения)."""
     if isinstance(value, bool):
         return default
     if isinstance(value, int):
         return value
     try:
         return int(value)
-    except (TypeError, ValueError):
+    except (TypeError, ValueError, OverflowError):
         return default
 
 
@@ -55,11 +57,32 @@ def _coerce_id_list(value: Any) -> list[int]:
     return ids
 
 
-def _coerce_best(value: Any) -> dict[str, int]:
-    """Словарь str → int; некорректные значения сводятся к 0, ключи — к str."""
+def _coerce_cg_stats(value: Any) -> dict[str, dict[str, int]]:
+    """Словарь str → {present, correct, false_positive}, все счётчики — int.
+
+    Не-dict значение → {} (всё выбрасывается). Внутреннее значение не-dict —
+    нулевые счётчики (ключ конфликта сохраняется). Каждый счётчик приводится
+    через _coerce_int к целому (мусор → 0) и ограничивается снизу нулём,
+    ключи — к str. Затем ограничиваем correct сверху present (сначала
+    клампим present, потом correct против клампнутого present), чтобы
+    инвариант 0 <= correct <= present держался даже на повреждённых файлах.
+    """
     if not isinstance(value, dict):
         return {}
-    return {str(k): _coerce_int(v, 0) for k, v in value.items()}
+    result: dict[str, dict[str, int]] = {}
+    for k, v in value.items():
+        if not isinstance(v, dict):
+            result[str(k)] = {"present": 0, "correct": 0, "false_positive": 0}
+            continue
+        present = max(0, _coerce_int(v.get("present"), 0))
+        correct = max(0, min(_coerce_int(v.get("correct"), 0), present))
+        false_positive = max(0, _coerce_int(v.get("false_positive"), 0))
+        result[str(k)] = {
+            "present": present,
+            "correct": correct,
+            "false_positive": false_positive,
+        }
+    return result
 
 
 def _normalize_entry(entry: Any) -> dict[str, Any] | None:
@@ -75,7 +98,7 @@ def _normalize_entry(entry: Any) -> dict[str, Any] | None:
         "total_correct": _coerce_int(entry.get("total_correct"), 0),
         "total_possible": _coerce_int(entry.get("total_possible"), 0),
         "completed": _coerce_id_list(entry.get("completed")),
-        "best": _coerce_best(entry.get("best")),
+        "conflictogens": _coerce_cg_stats(entry.get("conflictogens")),
     }
 
 
@@ -157,21 +180,52 @@ class Store:
     # --- публичный интерфейс ---
 
     def record_attempt(
-        self, user_id: int, exercise_id: int, score_num: int, score_den: int
+        self,
+        user_id: int,
+        exercise_id: int,
+        correct: Sequence[str],
+        missed: Sequence[str],
+        false_positive: Sequence[str],
     ) -> None:
-        """Фиксирует одну попытку и обновляет статистику."""
+        """Фиксирует одну попытку и обновляет статистику (общую и по конфликтогенам).
+
+        `correct`/`missed`/`false_positive` — простые строковые id конфликтогенов
+        (хранилище не знает про модели домена). Предпосылка: внутри каждого
+        аргумента id уникальны (гарантирует evaluate() в bot/scoring.py), поэтому
+        каждый id просто добавляет 1 к нужному счётчику.
+
+        Счётчики по конфликтогенам:
+        - present — для каждого id из correct И из missed (конфликтоген реально
+          был в попытке);
+        - correct — для каждого id из correct;
+        - false_positive — для каждого id из false_positive (включая «ложные
+          тревоги» на контрольных примерах, где correct и missed пусты).
+        """
+        # Материализуем аргументы один раз: принимаем и списки, и кортежи.
+        correct = tuple(correct)
+        missed = tuple(missed)
+        false_positive = tuple(false_positive)
         with self._lock:
             entry = self._entry(user_id)
             entry["attempts"] = int(entry.get("attempts", 0)) + 1
-            entry["total_correct"] = int(entry.get("total_correct", 0)) + score_num
-            entry["total_possible"] = int(entry.get("total_possible", 0)) + score_den
+            entry["total_correct"] = int(entry.get("total_correct", 0)) + len(correct)
+            entry["total_possible"] = int(entry.get("total_possible", 0)) + len(correct) + len(missed)
             completed: list[int] = entry.setdefault("completed", [])
             if exercise_id not in completed:
                 completed.append(exercise_id)
-            best: dict[str, int] = entry.setdefault("best", {})
-            key = str(exercise_id)
-            if score_num > int(best.get(key, 0)):
-                best[key] = score_num
+            counters: dict[str, dict[str, int]] = entry.setdefault("conflictogens", {})
+
+            def _bump(cid: str, field: str) -> None:
+                c = counters.setdefault(str(cid), {"present": 0, "correct": 0, "false_positive": 0})
+                c[field] = int(c.get(field, 0)) + 1
+
+            for cid in correct:
+                _bump(cid, "present")
+                _bump(cid, "correct")
+            for cid in missed:
+                _bump(cid, "present")
+            for cid in false_positive:
+                _bump(cid, "false_positive")
             self._persist()
 
     def stats(self, user_id: int) -> dict[str, Any]:
@@ -190,7 +244,10 @@ class Store:
                 "total_possible": total_possible,
                 "accuracy": accuracy,
                 "completed": list(entry.get("completed", [])),
-                "best": dict(entry.get("best", {})),
+                # Глубокая копия: обработчики не должны менять внутреннее состояние.
+                "conflictogens": {
+                    str(k): dict(v) for k, v in (entry.get("conflictogens") or {}).items()
+                },
             }
 
     def completed_ids(self, user_id: int) -> set[int]:

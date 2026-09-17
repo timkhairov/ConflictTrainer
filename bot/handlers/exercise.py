@@ -182,7 +182,10 @@ async def submit(call: CallbackQuery, exercises_by_id: dict[int, Exercise],
     selected = data.get("selected", [])
     result = evaluate(exercise, selected)
     try:
-        store.record_attempt(call.from_user.id, exercise.id, result.score_num, result.score_den)
+        store.record_attempt(
+            call.from_user.id, exercise.id,
+            result.correct, result.missed, result.false_positive,
+        )
         await state.clear()
         await safe_edit(call, _format_feedback(exercise, result, conflictogens_by_id),
                         feedback_keyboard())

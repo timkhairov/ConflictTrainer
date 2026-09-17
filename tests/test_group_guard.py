@@ -21,7 +21,7 @@ import types
 import pytest
 
 from bot.handlers import fallback, stats as st
-from bot.models import Exercise
+from bot.models import Conflictogen
 from bot.store import Store
 
 
@@ -110,9 +110,9 @@ def test_fallback_callback_still_unfiltered():
 
 def test_cmd_stats_in_group_sends_hint_not_stats(tmp_path):
     store = Store(tmp_path / "users.json")
-    store.record_attempt(7, 1, 2, 2)  # у пользователя есть данные — их нельзя протечь
+    store.record_attempt(7, 1, ("a", "b"), (), ())  # у пользователя есть данные — их нельзя протечь
     msg = FakeMessage("group")
-    run(st.cmd_stats(msg, store, {}))
+    run(st.cmd_stats(msg, store, []))
     assert len(msg.answers) == 1
     assert "личном чате" in msg.answers[0]
     assert "Твой прогресс" not in msg.answers[0]
@@ -120,9 +120,9 @@ def test_cmd_stats_in_group_sends_hint_not_stats(tmp_path):
 
 def test_cmd_stats_in_supergroup_sends_hint_not_stats(tmp_path):
     store = Store(tmp_path / "users.json")
-    store.record_attempt(7, 1, 2, 2)
+    store.record_attempt(7, 1, ("a", "b"), (), ())
     msg = FakeMessage("supergroup")
-    run(st.cmd_stats(msg, store, {}))
+    run(st.cmd_stats(msg, store, []))
     assert len(msg.answers) == 1
     assert "личном чате" in msg.answers[0]
     assert "Твой прогресс" not in msg.answers[0]
@@ -130,10 +130,13 @@ def test_cmd_stats_in_supergroup_sends_hint_not_stats(tmp_path):
 
 def test_cmd_stats_in_private_shows_full_stats(tmp_path):
     store = Store(tmp_path / "users.json")
-    store.record_attempt(7, 1, 2, 2)
-    exercises_by_id = {1: Exercise(id=1, phrase="p", conflictogens=("a",))}
+    store.record_attempt(7, 1, ("a", "b"), (), ())
+    conflictogens = [
+        Conflictogen(id="a", name="Н", description=""),
+        Conflictogen(id="b", name="О", description=""),
+    ]
     msg = FakeMessage("private")
-    run(st.cmd_stats(msg, store, exercises_by_id))
+    run(st.cmd_stats(msg, store, conflictogens))
     assert len(msg.answers) == 1
     assert "Твой прогресс" in msg.answers[0]
     assert "2 из 2" in msg.answers[0]
@@ -147,7 +150,7 @@ def test_cb_stats_in_group_sends_hint_no_edit_no_store(chat_type):
     # В группе/супергруппе кнопка не редактирует сообщение и не читает store
     # (сентинел взорвался бы иначе), а отвечает ровно одной подсказкой.
     call = FakeCallbackQuery(chat_type)
-    run(st.cb_stats(call, _StatsSentinel(), {}))
+    run(st.cb_stats(call, _StatsSentinel(), []))
     assert len(call.answers) == 1
     assert "личном чате" in call.answers[0]
     assert "Твой прогресс" not in call.answers[0]
@@ -158,7 +161,7 @@ def test_cb_stats_with_none_message_sends_hint_no_store():
     # call.message is None (очень старое сообщение) — тоже только подсказка,
     # без edits и без чтения store.
     call = FakeCallbackQuery(None)
-    run(st.cb_stats(call, _StatsSentinel(), {}))
+    run(st.cb_stats(call, _StatsSentinel(), []))
     assert call.message is None
     assert len(call.answers) == 1
     assert "личном чате" in call.answers[0]
@@ -167,10 +170,13 @@ def test_cb_stats_with_none_message_sends_hint_no_store():
 def test_cb_stats_in_private_edits_full_stats(tmp_path):
     # В личном чате кнопка работает как раньше: edit с полной статистикой.
     store = Store(tmp_path / "users.json")
-    store.record_attempt(7, 1, 2, 2)
-    exercises_by_id = {1: Exercise(id=1, phrase="p", conflictogens=("a",))}
+    store.record_attempt(7, 1, ("a", "b"), (), ())
+    conflictogens = [
+        Conflictogen(id="a", name="Н", description=""),
+        Conflictogen(id="b", name="О", description=""),
+    ]
     call = FakeCallbackQuery("private")
-    run(st.cb_stats(call, store, exercises_by_id))
+    run(st.cb_stats(call, store, conflictogens))
     assert len(call.message.edits) == 1
     assert "Твой прогресс" in call.message.edits[0]
     assert "2 из 2" in call.message.edits[0]

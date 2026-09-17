@@ -1,20 +1,19 @@
-"""Тесты пользовательского текста: без номеров упражнений.
+"""Тесты пользовательского текста.
 
 Упражнения выдаются случайно из непройденных, поэтому номер не несёт
 смысла и не должен показываться пользователю. Покрыто:
-- _phrase_snippet: короткие фразы целиком, длинные — обрезка не длиннее
-  лимита по последнему пробелу + «…» только при реальном обрезании,
-  HTML-экранирование ПОСЛЕ обрезки (сущности не рвутся);
-- _best_lines: фрагмент фразы в «» + счёт, без номера упражнения,
-  сортировка по id, повреждённые ключи пропускаются;
+- _cg_lines: порядок строк — порядок списка conflictogens (файла данных),
+  формат «N из M (P%)», суффикс «лишних» только при fp > 0, строка
+  «лишних отметок» для fp без появлений, пропуск не встречавшихся
+  конфликтогенов и неизвестных cids из данных, HTML-экранирование имён;
+- _stats_text: ранний выход при нулевых попытках, общий раздел без изменений,
+  заголовок «По конфликтогенам» только если есть строки;
 - _format_feedback: заголовок «Разбор» без номера, строка «Фраза:»;
 - _begin: фраза + инструкция, без заголовка «Упражнение N».
 """
 import asyncio
 import random
 import types
-
-from aiogram.utils.text_decorations import html_decoration as html
 
 from bot.handlers import exercise as ex
 from bot.handlers import stats as st
@@ -26,86 +25,136 @@ def run(coro):
     return asyncio.run(coro)
 
 
-# --- _phrase_snippet ---
-
-
-def test_snippet_short_phrase_unchanged():
-    assert st._phrase_snippet("короткая фраза") == "короткая фраза"
-
-
-def test_snippet_exactly_limit_unchanged():
-    phrase = "a" * 40
-    assert st._phrase_snippet(phrase) == phrase
-
-
-def test_snippet_escapes_html_specials():
-    assert st._phrase_snippet("a < b > c & d") == "a &lt; b &gt; c &amp; d"
-
-
-def test_snippet_truncates_at_last_space_with_ellipsis():
-    phrase = "a" * 25 + " " + "b" * 25  # 51 > 40
-    # обрыв по последнему пробелу: «b…» не попадает в сниппет
-    assert st._phrase_snippet(phrase) == "a" * 25 + "…"
-
-
-def test_snippet_hard_cut_when_no_space():
-    phrase = "x" * 50
-    assert st._phrase_snippet(phrase) == "x" * 40 + "…"
-
-
-def test_snippet_escapes_after_truncation_never_splits_entity():
-    # Лимит режет фразу в середине; экранируем ПОСЛЕ обрезки, поэтому
-    # в результате нет «сырых» спецсимволов и порванных сущностей.
-    phrase = "a & b < c> " * 8
-    cut = phrase[:40]
-    expected = html.quote(cut[: cut.rfind(" ")]) + "…"
-    assert st._phrase_snippet(phrase) == expected
-    # ни одного «сырого» спецсимвола вне HTML-сущностей
-    out = st._phrase_snippet(phrase)
-    assert "<" not in out and ">" not in out
-    assert "& " not in out
-
-
-# --- _best_lines ---
-
-
-def test_best_lines_skips_clean_exercises():
-    # чистая фраза (пустые conflictogens) — «лучший счёт» 0/0 не показываем
-    exercises_by_id = {
-        1: Exercise(id=1, phrase="p1", conflictogens=("a",)),
-        2: Exercise(id=2, phrase="p2", conflictogens=()),
-    }
-    lines = st._best_lines({"1": 1, "2": 0}, exercises_by_id)
-    assert len(lines) == 1
-    assert "0/0" not in lines[0]
-    assert lines[0].endswith("1/1")
-
-
-def test_best_lines_snippet_score_and_no_number():
-    exercises_by_id = {
-        1: Exercise(id=1, phrase="короткая фраза", conflictogens=("a", "b")),
-        2: Exercise(id=2, phrase="a" * 60, conflictogens=("a",)),
-    }
-    # порядок в best не важен — вывод сортируется по id
-    lines = st._best_lines({"2": 2, "1": 1}, exercises_by_id)
-    assert lines == [
-        "  • «короткая фраза» — 1/2",
-        "  • «" + "a" * 40 + "…» — 2/1",
+def _cgs():
+    """Каталог конфликтогенов в «порядке файла данных» (как клавиатура)."""
+    return [
+        Conflictogen(id="a", name="Генерализация", description=""),
+        Conflictogen(id="b", name="Обвинения и стыд", description=""),
+        Conflictogen(id="c", name="Оценки", description=""),
+        Conflictogen(id="d", name="Не встречался", description=""),
     ]
-    for line in lines:
-        assert "Упражнение" not in line
 
 
-def test_best_lines_skips_bad_keys_and_unknown_ids():
-    exercises_by_id = {
-        1: Exercise(id=1, phrase="p1", conflictogens=("a",)),
-        2: Exercise(id=2, phrase="p2", conflictogens=("a",)),
+# --- _cg_lines ---
+
+
+def test_cg_lines_data_order_and_format():
+    # Порядок — по списку conflictogens (a, b), а не по ключам словаря (b, a).
+    lines = st._cg_lines(
+        {
+            "b": {"present": 4, "correct": 3, "false_positive": 1},
+            "a": {"present": 8, "correct": 5, "false_positive": 0},
+        },
+        _cgs(),
+    )
+    assert lines == [
+        f"  • Генерализация — 5 из 8 ({5 / 8 * 100:.0f}%)",
+        "  • Обвинения и стыд — 3 из 4 (75%), лишних: 1",
+    ]
+
+
+def test_cg_lines_fp_suffix_only_when_positive():
+    # fp == 0 — суффикса «лишних» нет (см. test_cg_lines_data_order_and_format);
+    # fp > 0 — добавляется.
+    lines = st._cg_lines(
+        {"a": {"present": 2, "correct": 1, "false_positive": 2}}, _cgs()
+    )
+    assert lines == ["  • Генерализация — 1 из 2 (50%), лишних: 2"]
+
+
+def test_cg_lines_false_positive_only_no_percentage():
+    # Появлений не было, но были лишние отметки: строка без процента.
+    lines = st._cg_lines(
+        {"c": {"present": 0, "correct": 0, "false_positive": 2}}, _cgs()
+    )
+    assert lines == ["  • Оценки — лишних отметок: 2"]
+    assert "%" not in lines[0]
+
+
+def test_cg_lines_skips_unseen_and_unknown_cids():
+    # «d» есть в каталоге, но счётчики нулевые → пропускается;
+    # «ghost» есть в данных, но нет в каталоге → тоже не показывается.
+    cg = {
+        "a": {"present": 1, "correct": 1, "false_positive": 0},
+        "d": {"present": 0, "correct": 0, "false_positive": 0},
+        "ghost": {"present": 3, "correct": 2, "false_positive": 0},
     }
-    best = {"2": 2, "1": 1, "abc": 5, "99": 3}
-    lines = st._best_lines(best, exercises_by_id)
-    assert len(lines) == 2
-    assert lines[0].endswith("1/1")
-    assert lines[1].endswith("2/1")
+    lines = st._cg_lines(cg, _cgs())
+    assert lines == ["  • Генерализация — 1 из 1 (100%)"]
+
+
+def test_cg_lines_html_quoting_of_names():
+    cgs = [Conflictogen(id="a", name="А <Б> & В", description="")]
+    lines = st._cg_lines(
+        {"a": {"present": 2, "correct": 1, "false_positive": 0}}, cgs
+    )
+    assert lines == [f"  • А &lt;Б&gt; &amp; В — 1 из 2 ({1 / 2 * 100:.0f}%)"]
+
+
+def test_cg_lines_empty_data_no_lines():
+    assert st._cg_lines({}, _cgs()) == []
+
+
+# --- _stats_text ---
+
+
+def test_stats_text_zero_attempts_early_return():
+    s = {
+        "attempts": 0, "total_correct": 0, "total_possible": 0,
+        "accuracy": None, "completed": [], "conflictogens": {},
+    }
+    text = st._stats_text(s, _cgs())
+    assert "Ты ещё не проходил(а) ни одного упражнения." in text
+    assert "По конфликтогенам" not in text
+
+
+def test_stats_text_totals_unchanged_and_header_when_lines_exist():
+    s = {
+        "attempts": 3,
+        "total_correct": 8,
+        "total_possible": 10,
+        "accuracy": 0.8,
+        "completed": [1, 2],
+        "conflictogens": {
+            "a": {"present": 8, "correct": 5, "false_positive": 0},
+            "b": {"present": 2, "correct": 1, "false_positive": 1},
+        },
+    }
+    text = st._stats_text(s, _cgs())
+    # Общий раздел — без изменений.
+    assert "📊 <b>Твой прогресс</b>" in text
+    assert "Попыток: 3" in text
+    assert "Собрано правильных: 8 из 10" in text
+    assert "Точность: 80%" in text
+    assert "Пройдено упражнений: 2" in text
+    # Новый раздел — только с строками.
+    assert "🔍 <b>По конфликтогенам:</b>" in text
+    assert f"  • Генерализация — 5 из 8 ({5 / 8 * 100:.0f}%)" in text
+    assert "  • Обвинения и стыд — 1 из 2 (50%), лишних: 1" in text
+    assert "Лучшие счёты" not in text
+
+
+def test_stats_text_no_header_when_no_conflictogen_lines():
+    # Только «ghost» в данных: каталогу он неизвестен → строк нет → заголовка нет.
+    s = {
+        "attempts": 1, "total_correct": 1, "total_possible": 2,
+        "accuracy": 0.5, "completed": [1],
+        "conflictogens": {"ghost": {"present": 1, "correct": 1, "false_positive": 0}},
+    }
+    text = st._stats_text(s, _cgs())
+    assert "Попыток: 1" in text
+    assert "По конфликтогенам" not in text
+    assert "ghost" not in text
+
+
+def test_stats_text_missing_conflictogens_key():
+    # Старая запись без ключа «conflictogens»: не падает, раздела нет.
+    s = {
+        "attempts": 1, "total_correct": 0, "total_possible": 0,
+        "accuracy": None, "completed": [1],
+    }
+    text = st._stats_text(s, _cgs())
+    assert "По конфликтогенам" not in text
 
 
 # --- _format_feedback ---

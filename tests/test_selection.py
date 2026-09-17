@@ -15,7 +15,7 @@ def _exercises():
 def test_unattempted_preferred(tmp_path, monkeypatch):
     exercises = _exercises()
     store = Store(tmp_path / "users.json")
-    store.record_attempt(1, 1, 1, 1)  # упражнение 1 уже пройдено
+    store.record_attempt(1, 1, ("a",), (), ())  # упражнение 1 уже пройдено
 
     # детерминированный выбор: всегда первый элемент пула
     monkeypatch.setattr(random, "choice", lambda seq: seq[0])
@@ -30,7 +30,7 @@ def test_all_attempted_falls_back_to_full_pool(tmp_path, monkeypatch):
     exercises = _exercises()
     store = Store(tmp_path / "users.json")
     for e in exercises:
-        store.record_attempt(1, e.id, 1, 1)  # всё пройдено
+        store.record_attempt(1, e.id, ("a",), (), ())  # всё пройдено
 
     captured = {}
 
