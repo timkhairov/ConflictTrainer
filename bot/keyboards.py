@@ -15,10 +15,13 @@ CB_MENU_START_TRAINING = "menu:start_training"
 CB_MENU_STATS = "menu:stats"
 CB_MENU_ABOUT = "menu:about"
 CB_DOMAIN = "dom:"           # dom:<id> — выбрать сферу жизни
-CB_SUBJECT = "sub:"          # sub:<id> — выбрать тему внутри сферы
+CB_SUBJECT = "sub:"          # sub:<id> — toggle темы в пикере (отметить/снять)
+CB_SUBJECT_ALL = "subsel:all"    # «Все темы сферы» — стартовать по всем темам сферы
+CB_SUBJECT_START = "subsel:start"  # «Начать тренировку» — стартовать по отмеченным
 CB_TOGGLE = "cg:"            # cg:<id> — переключить конфликтоген
 CB_SUBMIT = "do:submit"      # отправить ответ (отдельный префикс, не пересекается с "cg:")
 CB_NEXT = "flow:next"        # следующее упражнение
+CB_TO_DOMAINS = "flow:domains"   # «Назад» — вернуться к выбору сферы
 CB_TO_MENU = "flow:menu"     # вернуться в главное меню
 
 
@@ -49,16 +52,28 @@ def domain_keyboard(domains: list[Domain]) -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(inline_keyboard=rows)
 
 
-def subject_keyboard(subjects: list[Subject]) -> InlineKeyboardMarkup:
-    """Выбор темы внутри сферы: по кнопке на тему + возврат в главное меню.
+def subject_select_keyboard(subjects: list[Subject],
+                            selected: set[str]) -> InlineKeyboardMarkup:
+    """Пикер тем внутри сферы: отметить одну/несколько и стартовать.
 
     `subjects` — уже отфильтрованный по сфере список (фильтрует вызывающий,
-    см. handlers.exercise.choose_subject).
+    см. handlers.exercise.choose_subject). Отмеченные темы помечаются «✓»,
+    остальные — «•» (нажатие `sub:<id>` переключает отметку). Ниже — действия:
+    «Все темы сферы» (стартовать по всем), «Начать тренировку» (по отмеченным)
+    и «Назад»/«В меню».
     """
     rows: list[list[InlineKeyboardButton]] = []
     for s in subjects:
-        rows.append([InlineKeyboardButton(text=s.name, callback_data=f"{CB_SUBJECT}{s.id}")])
-    rows.append([InlineKeyboardButton(text="🏠 В меню", callback_data=CB_TO_MENU)])
+        mark = "✓ " if s.id in selected else "• "
+        rows.append(
+            [InlineKeyboardButton(text=f"{mark}{s.name}", callback_data=f"{CB_SUBJECT}{s.id}")]
+        )
+    rows.append([InlineKeyboardButton(text="🎲 Все темы сферы", callback_data=CB_SUBJECT_ALL)])
+    rows.append([InlineKeyboardButton(text="✅ Начать тренировку", callback_data=CB_SUBJECT_START)])
+    rows.append([
+        InlineKeyboardButton(text="◀️ Назад", callback_data=CB_TO_DOMAINS),
+        InlineKeyboardButton(text="🏠 В меню", callback_data=CB_TO_MENU),
+    ])
     return InlineKeyboardMarkup(inline_keyboard=rows)
 
 

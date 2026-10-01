@@ -240,7 +240,7 @@ def test_begin_prompt_number_free(tmp_path, monkeypatch):
     conflictogens = [Conflictogen(id="a", name="Н", description="")]
     call = FakeCall()
     state = FakeState()
-    run(ex._begin(call, exercises, store, conflictogens, state, domain_id="work", subject_id="salary"))
+    run(ex._begin(call, exercises, store, conflictogens, state, domain_id="work", subject_ids=["salary"]))
 
     text, kb = call.message.edits[0]
     assert text.startswith("💬 фраза &amp; тест")
