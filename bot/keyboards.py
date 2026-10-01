@@ -8,12 +8,14 @@ from __future__ import annotations
 
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-from .models import Conflictogen
+from .models import Conflictogen, Domain, Subject
 
 # --- callback-префиксы ---
 CB_MENU_START_TRAINING = "menu:start_training"
 CB_MENU_STATS = "menu:stats"
 CB_MENU_ABOUT = "menu:about"
+CB_DOMAIN = "dom:"           # dom:<id> — выбрать сферу жизни
+CB_SUBJECT = "sub:"          # sub:<id> — выбрать тему внутри сферы
 CB_TOGGLE = "cg:"            # cg:<id> — переключить конфликтоген
 CB_SUBMIT = "do:submit"      # отправить ответ (отдельный префикс, не пересекается с "cg:")
 CB_NEXT = "flow:next"        # следующее упражнение
@@ -31,6 +33,33 @@ def main_menu() -> InlineKeyboardMarkup:
             ],
         ]
     )
+
+
+def domain_keyboard(domains: list[Domain]) -> InlineKeyboardMarkup:
+    """Выбор сферы жизни: по кнопке на сферу + возврат в главное меню.
+
+    Если у сферы задан icon — он становится префиксом подписи («💼 Работа»),
+    без icon кнопка показывает только название.
+    """
+    rows: list[list[InlineKeyboardButton]] = []
+    for d in domains:
+        text = f"{d.icon} {d.name}" if d.icon else d.name
+        rows.append([InlineKeyboardButton(text=text, callback_data=f"{CB_DOMAIN}{d.id}")])
+    rows.append([InlineKeyboardButton(text="🏠 В меню", callback_data=CB_TO_MENU)])
+    return InlineKeyboardMarkup(inline_keyboard=rows)
+
+
+def subject_keyboard(subjects: list[Subject]) -> InlineKeyboardMarkup:
+    """Выбор темы внутри сферы: по кнопке на тему + возврат в главное меню.
+
+    `subjects` — уже отфильтрованный по сфере список (фильтрует вызывающий,
+    см. handlers.exercise.choose_subject).
+    """
+    rows: list[list[InlineKeyboardButton]] = []
+    for s in subjects:
+        rows.append([InlineKeyboardButton(text=s.name, callback_data=f"{CB_SUBJECT}{s.id}")])
+    rows.append([InlineKeyboardButton(text="🏠 В меню", callback_data=CB_TO_MENU)])
+    return InlineKeyboardMarkup(inline_keyboard=rows)
 
 
 def exercise_keyboard(conflictogens: list[Conflictogen], selected: set[str]) -> InlineKeyboardMarkup:

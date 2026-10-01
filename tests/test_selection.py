@@ -9,7 +9,10 @@ from bot.store import Store
 
 
 def _exercises():
-    return [Exercise(id=i, phrase=f"p{i}", conflictogens=("a",)) for i in (1, 2, 3)]
+    return [
+        Exercise(id=i, phrase=f"p{i}", conflictogens=("a",), domain="work", subject="salary")
+        for i in (1, 2, 3)
+    ]
 
 
 def test_unattempted_preferred(tmp_path, monkeypatch):

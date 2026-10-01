@@ -1,533 +1,1939 @@
 {
-  "_comment": "БИБЛИОТЕКА УПРАЖНЕНИЙ. Поля: id — уникальный номер, phrase — текст конфликтной ситуации, conflictogens — СПИСОК верных id из conflictogens.json (ровно те, что «зашиты» в фразу), note — необязательное пояснение к разбору.",
+  "_comment": "БИБЛИОТЕКА УПРАЖНЕНИЙ. Поля: id — уникальный номер, phrase — текст конфликтной ситуации, conflictogens — СПИСОК верных id из conflictogens.json (ровно те, что «зашиты» в фразу), domain — id сферы жизни из domains.json (например, \"work\" или \"family\"), note — необязательное пояснение к разбору.",
   "exercises": [
     {
       "id": 1,
       "phrase": "«Твои презентации на демо заставляют меня краснеть перед коллегами»",
-      "conflictogens": ["accusation_shame", "aggression"],
-      "note": "Попытка вызвать чувство стыда, привязывая результат к неловкому положению перед коллегами (accusation_shame). Подача косвенная, с вовлечением третьей стороны — черта пассивной агрессии (aggression)."
+      "conflictogens": [
+        "accusation_shame",
+        "aggression"
+      ],
+      "domain": "work",
+      "note": "Попытка вызвать чувство стыда, привязывая результат к неловкому положению перед коллегами (accusation_shame). Подача косвенная, с вовлечением третьей стороны — черта пассивной агрессии (aggression).",
+      "subject": "meetings"
     },
     {
       "id": 2,
       "phrase": "«Все \"молодцы\" — как обычно не уложились ни в бюджет ни в сроки»",
-      "conflictogens": ["generalization", "aggression"],
-      "note": "«Как обычно» — обобщение на всё прошлое (generalization). Ироничное «все \"молодцы\"» — сарказм, то есть пассивная агрессия (aggression)."
+      "conflictogens": [
+        "generalization",
+        "aggression"
+      ],
+      "domain": "work",
+      "note": "«Как обычно» — обобщение на всё прошлое (generalization). Ироничное «все \"молодцы\"» — сарказм, то есть пассивная агрессия (aggression).",
+      "subject": "deadlines"
     },
     {
       "id": 3,
       "phrase": "«Функциональность на \"отлично\", а вот дизайн пока \"на троечку\" — видимо, визулка — это не ваша сильная сторона»",
-      "conflictogens": ["ratings", "personal_judgments"],
-      "note": "«На отлично»/«на троечку» — оценки (ratings). «Не ваша сильная сторона» — вывод о качестве/свойстве человека, а не о конкретном факте (personal_judgments)."
+      "conflictogens": [
+        "ratings",
+        "personal_judgments"
+      ],
+      "domain": "work",
+      "note": "«На отлично»/«на троечку» — оценки (ratings). «Не ваша сильная сторона» — вывод о качестве/свойстве человека, а не о конкретном факте (personal_judgments).",
+      "subject": "code_quality"
     },
     {
       "id": 4,
       "phrase": "«Твоя неорганизованность меня искренне удивляет и сердит»",
-      "conflictogens": ["personal_judgments"],
-      "note": "«Неорганизованность» — суждение о личном качестве, а не о конкретном факте (personal_judgments). Описание собственных чувств («удивляет и сердит») само по себе допустимо."
+      "conflictogens": [
+        "personal_judgments"
+      ],
+      "domain": "work",
+      "note": "«Неорганизованность» — суждение о личном качестве, а не о конкретном факте (personal_judgments). Описание собственных чувств («удивляет и сердит») само по себе допустимо.",
+      "subject": "deadlines"
     },
     {
       "id": 5,
       "phrase": "«Я могу интерпретировать то, что ты постоянно оспариваешь мои технические решения, только как неуважение»",
-      "conflictogens": ["generalization", "motive_judgments"],
-      "note": "«Постоянно» — обобщение (generalization). «Только как неуважение» — допущение о мотиве, почему человек так делает (motive_judgments)."
+      "conflictogens": [
+        "generalization",
+        "motive_judgments"
+      ],
+      "domain": "work",
+      "note": "«Постоянно» — обобщение (generalization). «Только как неуважение» — допущение о мотиве, почему человек так делает (motive_judgments).",
+      "subject": "teamwork"
     },
     {
       "id": 6,
       "phrase": "«В следующий раз выполняй распоряжения как описано, пожалуйста»",
-      "conflictogens": ["hierarchy"],
-      "note": "«Распоряжения» — обратная связь из позиции старшего к младшему (начальник-подчинённый), то есть иерархия (hierarchy)."
+      "conflictogens": [
+        "hierarchy"
+      ],
+      "domain": "work",
+      "note": "«Распоряжения» — обратная связь из позиции старшего к младшему (начальник-подчинённый), то есть иерархия (hierarchy).",
+      "subject": "hierarchy"
     },
     {
       "id": 7,
       "phrase": "«Вы всегда решаете задачи в срок и с наивысшим качеством — мне приятно видеть такой уровень уважения и стремления нас порадовать»",
-      "conflictogens": ["generalization", "motive_judgments"],
-      "note": "«Всегда» — обобщение (generalization). «Стремления нас порадовать» — допущение о мотиве поведения, а не описанный факт (motive_judgments)."
+      "conflictogens": [
+        "generalization",
+        "motive_judgments"
+      ],
+      "domain": "work",
+      "note": "«Всегда» — обобщение (generalization). «Стремления нас порадовать» — допущение о мотиве поведения, а не описанный факт (motive_judgments).",
+      "subject": "deadlines"
     },
     {
       "id": 8,
       "phrase": "«Ты ТЗ вообще открывал, прежде чем звонить мне?»",
-      "conflictogens": ["aggression"],
-      "note": "Сарказм и пренебрежительный риторический вопрос — пассивная агрессия (aggression). Никаких других маркеров во фразе нет."
+      "conflictogens": [
+        "aggression"
+      ],
+      "domain": "work",
+      "note": "Сарказм и пренебрежительный риторический вопрос — пассивная агрессия (aggression). Никаких других маркеров во фразе нет.",
+      "subject": "meetings"
     },
     {
       "id": 9,
       "phrase": "«Ты никогда не доводишь задачи до конца»",
-      "conflictogens": ["generalization"],
-      "note": "«Никогда» — обобщение регулярности поведения (generalization). Конкретные незакрытые задачи не названы."
+      "conflictogens": [
+        "generalization"
+      ],
+      "domain": "work",
+      "note": "«Никогда» — обобщение регулярности поведения (generalization). Конкретные незакрытые задачи не названы.",
+      "subject": "deadlines"
     },
     {
       "id": 10,
       "phrase": "«Ты лентяй: задача четвёртый день стоит без движения»",
-      "conflictogens": ["personal_judgments"],
-      "note": "«Лентяй» — ярлык о личности, а не о факте (personal_judgments). Вторая часть фразы — корректное наблюдение."
+      "conflictogens": [
+        "personal_judgments"
+      ],
+      "domain": "work",
+      "note": "«Лентяй» — ярлык о личности, а не о факте (personal_judgments). Вторая часть фразы — корректное наблюдение.",
+      "subject": "deadlines"
     },
     {
       "id": 11,
       "phrase": "«Ты задал этот вопрос на встрече с заказчиком специально, чтобы меня унизить»",
-      "conflictogens": ["motive_judgments"],
-      "note": "«Специально, чтобы унизить» — утверждение о мотиве поступка, а не описание факта (motive_judgments). Сам вопрос на встрече — нейтральное событие."
+      "conflictogens": [
+        "motive_judgments"
+      ],
+      "domain": "work",
+      "note": "«Специально, чтобы унизить» — утверждение о мотиве поступка, а не описание факта (motive_judgments). Сам вопрос на встрече — нейтральное событие.",
+      "subject": "meetings"
     },
     {
       "id": 12,
       "phrase": "«Сколько можно одно и то же спрашивать?!»",
-      "conflictogens": ["generalization", "aggression"],
-      "note": "«Одно и то же» — утверждение о регулярности (generalization). «Сколько можно» с восклицанием — раздражённая, резкая подача (aggression)."
+      "conflictogens": [
+        "generalization",
+        "aggression"
+      ],
+      "domain": "work",
+      "note": "«Одно и то же» — утверждение о регулярности (generalization). «Сколько можно» с восклицанием — раздражённая, резкая подача (aggression).",
+      "subject": "teamwork"
     },
     {
       "id": 13,
       "phrase": "«Ты эгоист: всегда берёшь себе самые простые задачи»",
-      "conflictogens": ["personal_judgments", "generalization"],
-      "note": "«Эгоист» — ярлык о личном качестве (personal_judgments). «Всегда» — обобщение (generalization)."
+      "conflictogens": [
+        "personal_judgments",
+        "generalization"
+      ],
+      "domain": "work",
+      "note": "«Эгоист» — ярлык о личном качестве (personal_judgments). «Всегда» — обобщение (generalization).",
+      "subject": "teamwork"
     },
     {
       "id": 14,
       "phrase": "«Вы подвели весь отдел перед генеральным директором. Жду письменную объяснительную к пятнице»",
-      "conflictogens": ["accusation_shame", "hierarchy"],
-      "note": "«Подвели весь отдел» — возложение вины с публичным стыдом (accusation_shame). Требование объяснительной — обратная связь из позиции начальника (hierarchy)."
+      "conflictogens": [
+        "accusation_shame",
+        "hierarchy"
+      ],
+      "domain": "work",
+      "note": "«Подвели весь отдел» — возложение вины с публичным стыдом (accusation_shame). Требование объяснительной — обратная связь из позиции начальника (hierarchy).",
+      "subject": "hierarchy"
     },
     {
       "id": 15,
       "phrase": "«Это же элементарно, чего тут непонятного?»",
-      "conflictogens": ["hierarchy"],
-      "note": "Снисходительная подача «свысока» — учительская позиция превосходства (hierarchy). Превосходство — один из базовых типов конфликтогенов в классификациях делового общения."
+      "conflictogens": [
+        "hierarchy"
+      ],
+      "domain": "work",
+      "note": "Снисходительная подача «свысока» — учительская позиция превосходства (hierarchy). Превосходство — один из базовых типов конфликтогенов в классификациях делового общения.",
+      "subject": "code_quality"
     },
     {
       "id": 16,
       "phrase": "«Ты хоть понимаешь, что из-за тебя вся команда выходит на работу в выходные?!»",
-      "conflictogens": ["aggression", "accusation_shame"],
-      "note": "«Хоть понимаешь?!» — резкий риторический выпад (aggression). «Из-за тебя вся команда…» — возложение вины перед коллективом (accusation_shame)."
+      "conflictogens": [
+        "aggression",
+        "accusation_shame"
+      ],
+      "domain": "work",
+      "note": "«Хоть понимаешь?!» — резкий риторический выпад (aggression). «Из-за тебя вся команда…» — возложение вины перед коллективом (accusation_shame).",
+      "subject": "teamwork"
     },
     {
       "id": 17,
       "phrase": "«По-моему, вы в этом вопросе совсем не разбираетесь — вам, судя по всему, просто всё равно»",
-      "conflictogens": ["personal_judgments", "motive_judgments"],
-      "note": "«Не разбираетесь» — вывод о компетентности человека (personal_judgments). «Судя по всему, всё равно» — допущение о мотиве (безразличии) (motive_judgments)."
+      "conflictogens": [
+        "personal_judgments",
+        "motive_judgments"
+      ],
+      "domain": "work",
+      "note": "«Не разбираетесь» — вывод о компетентности человека (personal_judgments). «Судя по всему, всё равно» — допущение о мотиве (безразличии) (motive_judgments).",
+      "subject": "code_quality"
     },
     {
       "id": 18,
       "phrase": "«Ещё раз оспоришь моё решение на планёрке при всех — собирай вещи, найдём тебе проект поинтереснее»",
-      "conflictogens": ["aggression", "hierarchy"],
-      "note": "Угроза («собирай вещи») — открытая агрессия (aggression). «Моё решение» + право определять судьбу подчинённого — давление должностью (hierarchy)."
+      "conflictogens": [
+        "aggression",
+        "hierarchy"
+      ],
+      "domain": "work",
+      "note": "Угроза («собирай вещи») — открытая агрессия (aggression). «Моё решение» + право определять судьбу подчинённого — давление должностью (hierarchy).",
+      "subject": "meetings"
     },
     {
       "id": 19,
       "phrase": "«Может, мне разжевать это в третий раз? Вы же никогда не читаете итоги встреч, которые я лично готовлю»",
-      "conflictogens": ["generalization", "hierarchy"],
-      "note": "«Никогда» — обобщение (generalization). «Разжевать» — учительская позиция по отношению к команде (hierarchy)."
+      "conflictogens": [
+        "generalization",
+        "hierarchy"
+      ],
+      "domain": "work",
+      "note": "«Никогда» — обобщение (generalization). «Разжевать» — учительская позиция по отношению к команде (hierarchy).",
+      "subject": "meetings"
     },
     {
       "id": 20,
       "phrase": "«Тебе лишь бы поспорить: всегда надо всё переделать по-своему»",
-      "conflictogens": ["motive_judgments", "generalization"],
-      "note": "«Лишь бы поспорить» — приписывание мотива (спор ради спора) (motive_judgments). «Всегда» — обобщение (generalization)."
+      "conflictogens": [
+        "motive_judgments",
+        "generalization"
+      ],
+      "domain": "work",
+      "note": "«Лишь бы поспорить» — приписывание мотива (спор ради спора) (motive_judgments). «Всегда» — обобщение (generalization).",
+      "subject": "teamwork"
     },
     {
       "id": 21,
       "phrase": "«Твоё тестирование — на троечку: ты его явно делал для галочки»",
-      "conflictogens": ["ratings", "motive_judgments"],
-      "note": "«На троечку» — оценка по шкале (ratings). «Делал для галочки» — утверждение о мотиве (имитация работы, а не качество) (motive_judgments)."
+      "conflictogens": [
+        "ratings",
+        "motive_judgments"
+      ],
+      "domain": "work",
+      "note": "«На троечку» — оценка по шкале (ratings). «Делал для галочки» — утверждение о мотиве (имитация работы, а не качество) (motive_judgments).",
+      "subject": "code_quality"
     },
     {
       "id": 22,
       "phrase": "«Ну ты и криворукий: в такой простой фиче умудрился сделать три регрессии»",
-      "conflictogens": ["aggression", "personal_judgments"],
-      "note": "«Криворукий» — насмешливый ярлык о человеке (personal_judgments). Интонация «ну ты и…», «умудрился» — издёвка, то есть агрессия (aggression). «Три регрессии» — корректная фактическая часть."
+      "conflictogens": [
+        "aggression",
+        "personal_judgments"
+      ],
+      "domain": "work",
+      "note": "«Криворукий» — насмешливый ярлык о человеке (personal_judgments). Интонация «ну ты и…», «умудрился» — издёвка, то есть агрессия (aggression). «Три регрессии» — корректная фактическая часть.",
+      "subject": "code_quality"
     },
     {
       "id": 23,
       "phrase": "«Ты не на том уровне, чтобы решать такие вопросы, — просто сделай, как я сказал»",
-      "conflictogens": ["hierarchy", "aggression"],
-      "note": "«Не на том уровне» — оценка статуса, общение свысока (hierarchy). «Просто сделай, как я сказал» — резкий приказной тон (aggression)."
+      "conflictogens": [
+        "hierarchy",
+        "aggression"
+      ],
+      "domain": "work",
+      "note": "«Не на том уровне» — оценка статуса, общение свысока (hierarchy). «Просто сделай, как я сказал» — резкий приказной тон (aggression).",
+      "subject": "hierarchy"
     },
     {
       "id": 24,
       "phrase": "«Оцениваю твою работу на \"удовлетворительно\": для стажёра сойдёт, но на сеньорские задачи пока не рассчитывай»",
-      "conflictogens": ["ratings", "hierarchy"],
-      "note": "«Удовлетворительно» — оценка (ratings). «Для стажёра сойдёт» и распределение задач свысока — позиция старшего (hierarchy)."
+      "conflictogens": [
+        "ratings",
+        "hierarchy"
+      ],
+      "domain": "work",
+      "note": "«Удовлетворительно» — оценка (ratings). «Для стажёра сойдёт» и распределение задач свысока — позиция старшего (hierarchy).",
+      "subject": "salary"
     },
     {
       "id": 25,
       "phrase": "«После твоей ошибки мне пришлось оправдываться перед заказчиком — надеюсь, тебе хотя бы неловко за это»",
-      "conflictogens": ["accusation_shame"],
-      "note": "Фраза прямо подталкивает человека к переживанию стыда («тебе хотя бы неловко») вместо обсуждения поведения и последствий (accusation_shame)."
+      "conflictogens": [
+        "accusation_shame"
+      ],
+      "domain": "work",
+      "note": "Фраза прямо подталкивает человека к переживанию стыда («тебе хотя бы неловко») вместо обсуждения поведения и последствий (accusation_shame).",
+      "subject": "meetings"
     },
     {
       "id": 26,
       "phrase": "«Очень вовремя ты решил сообщить об этом за десять минут до релиза»",
-      "conflictogens": ["aggression"],
-      "note": "Формально фраза не содержит оскорбления, но «очень вовремя» в данном контексте — саркастическая пассивная агрессия (aggression)."
+      "conflictogens": [
+        "aggression"
+      ],
+      "domain": "work",
+      "note": "Формально фраза не содержит оскорбления, но «очень вовремя» в данном контексте — саркастическая пассивная агрессия (aggression).",
+      "subject": "deadlines"
     },
     {
       "id": 27,
       "phrase": "«Ты слишком импульсивный для таких переговоров»",
-      "conflictogens": ["personal_judgments"],
-      "note": "«Импульсивный» — характеристика личности, а не описание конкретного наблюдаемого поведения (personal_judgments)."
+      "conflictogens": [
+        "personal_judgments"
+      ],
+      "domain": "work",
+      "note": "«Импульсивный» — характеристика личности, а не описание конкретного наблюдаемого поведения (personal_judgments).",
+      "subject": "teamwork"
     },
     {
       "id": 28,
       "phrase": "«Мне как руководителю виднее, какой подход здесь правильный»",
-      "conflictogens": ["hierarchy"],
-      "note": "Аргумент основан на должностной позиции («как руководителю виднее»), а не на содержании решения (hierarchy)."
+      "conflictogens": [
+        "hierarchy"
+      ],
+      "domain": "work",
+      "note": "Аргумент основан на должностной позиции («как руководителю виднее»), а не на содержании решения (hierarchy).",
+      "subject": "hierarchy"
     },
     {
       "id": 29,
       "phrase": "«Ты не ответил в чате до вечера, потому что решил, что мой вопрос неважный»",
-      "conflictogens": ["motive_judgments"],
-      "note": "Причина отсутствия ответа приписывается человеку без проверки — это суждение о мотиве (motive_judgments)."
+      "conflictogens": [
+        "motive_judgments"
+      ],
+      "domain": "work",
+      "note": "Причина отсутствия ответа приписывается человеку без проверки — это суждение о мотиве (motive_judgments).",
+      "subject": "teamwork"
     },
     {
       "id": 30,
       "phrase": "«Доклад получился на уверенные семь из десяти»",
-      "conflictogens": ["ratings"],
-      "note": "Человеку выставляется оценка по произвольной шкале без описания конкретных наблюдений (ratings)."
+      "conflictogens": [
+        "ratings"
+      ],
+      "domain": "work",
+      "note": "Человеку выставляется оценка по произвольной шкале без описания конкретных наблюдений (ratings).",
+      "subject": "meetings"
     },
     {
       "id": 31,
       "phrase": "«Каждый раз, когда мы обсуждаем архитектуру, разговор заканчивается одним и тем же»",
-      "conflictogens": ["generalization"],
-      "note": "«Каждый раз» заявляет устойчивую закономерность без привязки к конкретным случаям (generalization)."
+      "conflictogens": [
+        "generalization"
+      ],
+      "domain": "work",
+      "note": "«Каждый раз» заявляет устойчивую закономерность без привязки к конкретным случаям (generalization).",
+      "subject": "code_quality"
     },
     {
       "id": 32,
       "phrase": "«Команда теперь будет разгребать последствия твоего решения — можешь этим гордиться»",
-      "conflictogens": ["accusation_shame"],
-      "note": "Конструкция направлена на то, чтобы человеку стало стыдно за последствия («можешь этим гордиться») (accusation_shame)."
+      "conflictogens": [
+        "accusation_shame"
+      ],
+      "domain": "work",
+      "note": "Конструкция направлена на то, чтобы человеку стало стыдно за последствия («можешь этим гордиться») (accusation_shame).",
+      "subject": "teamwork"
     },
     {
       "id": 33,
       "phrase": "«Ты человек хаотичный, поэтому твои оценки сроков сложно воспринимать всерьёз»",
-      "conflictogens": ["personal_judgments"],
-      "note": "«Человек хаотичный» — ярлык о личности; конкретные ошибки в оценках не названы (personal_judgments)."
+      "conflictogens": [
+        "personal_judgments"
+      ],
+      "domain": "work",
+      "note": "«Человек хаотичный» — ярлык о личности; конкретные ошибки в оценках не названы (personal_judgments).",
+      "subject": "deadlines"
     },
     {
       "id": 34,
       "phrase": "«Я здесь дольше тебя, поэтому просто доверься моему решению»",
-      "conflictogens": ["hierarchy"],
-      "note": "Правота выводится из старшинства и опыта как позиции превосходства, а обсуждение аргументов закрывается (hierarchy)."
+      "conflictogens": [
+        "hierarchy"
+      ],
+      "domain": "work",
+      "note": "Правота выводится из старшинства и опыта как позиции превосходства, а обсуждение аргументов закрывается (hierarchy).",
+      "subject": "hierarchy"
     },
     {
       "id": 35,
       "phrase": "«Ты добавил меня в копию, чтобы переложить на меня ответственность»",
-      "conflictogens": ["motive_judgments"],
-      "note": "Фраза утверждает непроверенную цель действия — переложить ответственность (motive_judgments)."
+      "conflictogens": [
+        "motive_judgments"
+      ],
+      "domain": "work",
+      "note": "Фраза утверждает непроверенную цель действия — переложить ответственность (motive_judgments).",
+      "subject": "teamwork"
     },
     {
       "id": 36,
       "phrase": "«Для первого выступления получилось на пять с минусом»",
-      "conflictogens": ["ratings"],
-      "note": "Даже позитивная школьная отметка остаётся внешней оценкой по шкале вместо конкретной обратной связи (ratings)."
+      "conflictogens": [
+        "ratings"
+      ],
+      "domain": "work",
+      "note": "Даже позитивная школьная отметка остаётся внешней оценкой по шкале вместо конкретной обратной связи (ratings).",
+      "subject": "meetings"
     },
     {
       "id": 37,
       "phrase": "«Как только появляется сложная задача, ты обычно находишь причину её отложить»",
-      "conflictogens": ["generalization"],
-      "note": "«Как только» и «обычно» формируют обобщённую закономерность поведения без конкретных эпизодов (generalization)."
+      "conflictogens": [
+        "generalization"
+      ],
+      "domain": "work",
+      "note": "«Как только» и «обычно» формируют обобщённую закономерность поведения без конкретных эпизодов (generalization).",
+      "subject": "deadlines"
     },
     {
       "id": 38,
       "phrase": "«Из-за тебя я выглядел непрофессионально перед всей группой»",
-      "conflictogens": ["accusation_shame"],
-      "note": "Ответственность за эмоционально и социально неприятное положение целиком возлагается на собеседника (accusation_shame)."
+      "conflictogens": [
+        "accusation_shame"
+      ],
+      "domain": "work",
+      "note": "Ответственность за эмоционально и социально неприятное положение целиком возлагается на собеседника (accusation_shame).",
+      "subject": "meetings"
     },
     {
       "id": 39,
       "phrase": "«За подготовку к релизу — два из пяти: сборка сейчас не проходит»",
-      "conflictogens": ["ratings"],
-      "note": "«Два из пяти» — внешняя оценка по шкале; факт о сборке можно было бы сообщить без выставления балла (ratings)."
+      "conflictogens": [
+        "ratings"
+      ],
+      "domain": "work",
+      "note": "«Два из пяти» — внешняя оценка по шкале; факт о сборке можно было бы сообщить без выставления балла (ratings).",
+      "subject": "deadlines"
     },
     {
       "id": 40,
       "phrase": "«Ты слишком мягкий и нерешительный как руководитель»",
-      "conflictogens": ["personal_judgments"],
-      "note": "«Мягкий» и «нерешительный» — оценки личных качеств, а не наблюдаемого поведения (personal_judgments)."
+      "conflictogens": [
+        "personal_judgments"
+      ],
+      "domain": "work",
+      "note": "«Мягкий» и «нерешительный» — оценки личных качеств, а не наблюдаемого поведения (personal_judgments).",
+      "subject": "hierarchy"
     },
     {
       "id": 41,
       "phrase": "«Когда станешь отвечать за бюджет, тогда и будем обсуждать твои возражения»",
-      "conflictogens": ["hierarchy"],
-      "note": "Право участвовать в обсуждении связывается со статусом и формальной ответственностью, что создаёт иерархическую позицию (hierarchy)."
+      "conflictogens": [
+        "hierarchy"
+      ],
+      "domain": "work",
+      "note": "Право участвовать в обсуждении связывается со статусом и формальной ответственностью, что создаёт иерархическую позицию (hierarchy).",
+      "subject": "salary"
     },
     {
       "id": 42,
       "phrase": "«Ты перенёс встречу, потому что тебе проще избегать неприятных разговоров»",
-      "conflictogens": ["motive_judgments"],
-      "note": "Перенос встречи — факт, а «проще избегать» — непроверенное объяснение мотива (motive_judgments)."
+      "conflictogens": [
+        "motive_judgments"
+      ],
+      "domain": "work",
+      "note": "Перенос встречи — факт, а «проще избегать» — непроверенное объяснение мотива (motive_judgments).",
+      "subject": "meetings"
     },
     {
       "id": 43,
       "phrase": "«Этот код — максимум на три с половиной из пяти»",
-      "conflictogens": ["ratings"],
-      "note": "Используется балльная оценка вместо конкретного описания проблем кода (ratings)."
+      "conflictogens": [
+        "ratings"
+      ],
+      "domain": "work",
+      "note": "Используется балльная оценка вместо конкретного описания проблем кода (ratings).",
+      "subject": "code_quality"
     },
     {
       "id": 44,
       "phrase": "«Вы опять всё провалили — теперь мне краснеть за команду перед бизнесом»",
-      "conflictogens": ["generalization", "accusation_shame"],
-      "note": "«Опять всё» обобщает повторяемость неудач (generalization), а «мне краснеть за команду» переносит разговор в вину и стыд (accusation_shame)."
+      "conflictogens": [
+        "generalization",
+        "accusation_shame"
+      ],
+      "domain": "work",
+      "note": "«Опять всё» обобщает повторяемость неудач (generalization), а «мне краснеть за команду» переносит разговор в вину и стыд (accusation_shame).",
+      "subject": "meetings"
     },
     {
       "id": 45,
       "phrase": "«Нормальные инженеры такие вопросы сами решают; мне что, за тебя ещё и думать?»",
-      "conflictogens": ["personal_judgments", "aggression"],
-      "note": "Сравнение с «нормальными инженерами» ставит под сомнение личную профессиональную нормальность (personal_judgments); риторический выпад — агрессия (aggression)."
+      "conflictogens": [
+        "personal_judgments",
+        "aggression"
+      ],
+      "domain": "work",
+      "note": "Сравнение с «нормальными инженерами» ставит под сомнение личную профессиональную нормальность (personal_judgments); риторический выпад — агрессия (aggression).",
+      "subject": "code_quality"
     },
     {
       "id": 46,
       "phrase": "«Я ставлю твоей инициативности двойку: похоже, ты просто не хочешь брать ответственность»",
-      "conflictogens": ["ratings", "motive_judgments"],
-      "note": "«Двойка» — оценка по шкале (ratings); «не хочешь брать ответственность» — утверждение о внутреннем мотиве (motive_judgments)."
+      "conflictogens": [
+        "ratings",
+        "motive_judgments"
+      ],
+      "domain": "work",
+      "note": "«Двойка» — оценка по шкале (ratings); «не хочешь брать ответственность» — утверждение о внутреннем мотиве (motive_judgments).",
+      "subject": "salary"
     },
     {
       "id": 47,
       "phrase": "«С твоим опытом можно было бы уже не задавать такие вопросы»",
-      "conflictogens": ["hierarchy", "accusation_shame"],
-      "note": "Ссылка на опыт задаёт позицию старшего/знающего (hierarchy), а формулировка вызывает неловкость за сам факт вопроса (accusation_shame)."
+      "conflictogens": [
+        "hierarchy",
+        "accusation_shame"
+      ],
+      "domain": "work",
+      "note": "Ссылка на опыт задаёт позицию старшего/знающего (hierarchy), а формулировка вызывает неловкость за сам факт вопроса (accusation_shame).",
+      "subject": "code_quality"
     },
     {
       "id": 48,
       "phrase": "«Ты всегда так внимательно слушаешь заказчика — сразу видно, что хочешь всем понравиться»",
-      "conflictogens": ["generalization", "motive_judgments"],
-      "note": "«Всегда» — обобщение (generalization); «хочешь всем понравиться» приписывает мотив даже в позитивно звучащей обратной связи (motive_judgments)."
+      "conflictogens": [
+        "generalization",
+        "motive_judgments"
+      ],
+      "domain": "work",
+      "note": "«Всегда» — обобщение (generalization); «хочешь всем понравиться» приписывает мотив даже в позитивно звучащей обратной связи (motive_judgments).",
+      "subject": "meetings"
     },
     {
       "id": 49,
       "phrase": "«Ваш план на четвёрку, но для команды вашего уровня это даже неплохо»",
-      "conflictogens": ["ratings", "hierarchy"],
-      "note": "«На четвёрку» — оценка (ratings); «для команды вашего уровня» задаёт сверху сравнительную иерархическую позицию (hierarchy)."
+      "conflictogens": [
+        "ratings",
+        "hierarchy"
+      ],
+      "domain": "work",
+      "note": "«На четвёрку» — оценка (ratings); «для команды вашего уровня» задаёт сверху сравнительную иерархическую позицию (hierarchy).",
+      "subject": "meetings"
     },
     {
       "id": 50,
       "phrase": "«Ты опять забыл про зависимость — поразительно, насколько можно быть невнимательным»",
-      "conflictogens": ["generalization", "personal_judgments"],
-      "note": "«Опять» превращает эпизод в повторяющийся паттерн (generalization), а «невнимательным» — характеристика человека (personal_judgments)."
+      "conflictogens": [
+        "generalization",
+        "personal_judgments"
+      ],
+      "domain": "work",
+      "note": "«Опять» превращает эпизод в повторяющийся паттерн (generalization), а «невнимательным» — характеристика человека (personal_judgments).",
+      "subject": "code_quality"
     },
     {
       "id": 51,
       "phrase": "«Не надо делать вид, что ты не понял: просто исправь до вечера»",
-      "conflictogens": ["motive_judgments", "aggression"],
-      "note": "«Делать вид» приписывает сознательную симуляцию непонимания (motive_judgments); приказной пренебрежительный тон усиливает агрессию (aggression)."
+      "conflictogens": [
+        "motive_judgments",
+        "aggression"
+      ],
+      "domain": "work",
+      "note": "«Делать вид» приписывает сознательную симуляцию непонимания (motive_judgments); приказной пренебрежительный тон усиливает агрессию (aggression).",
+      "subject": "code_quality"
     },
     {
       "id": 52,
       "phrase": "«После такого релиза хороший специалист сам бы извинился перед командой»",
-      "conflictogens": ["personal_judgments", "accusation_shame"],
-      "note": "Фраза задаёт норму «хорошего специалиста» как характеристику личности (personal_judgments) и подталкивает к стыду/публичному раскаянию (accusation_shame)."
+      "conflictogens": [
+        "personal_judgments",
+        "accusation_shame"
+      ],
+      "domain": "work",
+      "note": "Фраза задаёт норму «хорошего специалиста» как характеристику личности (personal_judgments) и подталкивает к стыду/публичному раскаянию (accusation_shame).",
+      "subject": "teamwork"
     },
     {
       "id": 53,
       "phrase": "«Я десять лет управляю проектами, поэтому не надо учить меня расставлять приоритеты»",
-      "conflictogens": ["hierarchy", "aggression"],
-      "note": "Стаж используется как аргумент превосходства (hierarchy), а «не надо учить меня» — резкий отсекающий выпад (aggression)."
+      "conflictogens": [
+        "hierarchy",
+        "aggression"
+      ],
+      "domain": "work",
+      "note": "Стаж используется как аргумент превосходства (hierarchy), а «не надо учить меня» — резкий отсекающий выпад (aggression).",
+      "subject": "hierarchy"
     },
     {
       "id": 54,
       "phrase": "«За такое качество я бы поставил два: вы явно торопились лишь бы закрыть задачу»",
-      "conflictogens": ["ratings", "motive_judgments"],
-      "note": "«Поставил два» — оценка (ratings); «лишь бы закрыть» — непроверенное предположение о мотиве (motive_judgments)."
+      "conflictogens": [
+        "ratings",
+        "motive_judgments"
+      ],
+      "domain": "work",
+      "note": "«Поставил два» — оценка (ratings); «лишь бы закрыть» — непроверенное предположение о мотиве (motive_judgments).",
+      "subject": "code_quality"
     },
     {
       "id": 55,
       "phrase": "«Ну конечно, у тебя же всегда самые важные дела, поэтому чужие сообщения можно не читать»",
-      "conflictogens": ["generalization", "aggression"],
-      "note": "«Всегда» — генерализация, а «ну конечно» и вся конструкция — саркастическая пассивная агрессия (aggression)."
+      "conflictogens": [
+        "generalization",
+        "aggression"
+      ],
+      "domain": "work",
+      "note": "«Всегда» — генерализация, а «ну конечно» и вся конструкция — саркастическая пассивная агрессия (aggression).",
+      "subject": "teamwork"
     },
     {
       "id": 56,
       "phrase": "«Я ожидал большего: на таком грейде это работа максимум на троечку»",
-      "conflictogens": ["ratings", "hierarchy"],
-      "note": "«На троечку» — оценивание (ratings); ссылка на грейд как основание говорить сверху усиливает иерархическую позицию (hierarchy)."
+      "conflictogens": [
+        "ratings",
+        "hierarchy"
+      ],
+      "domain": "work",
+      "note": "«На троечку» — оценивание (ratings); ссылка на грейд как основание говорить сверху усиливает иерархическую позицию (hierarchy).",
+      "subject": "salary"
     },
     {
       "id": 57,
       "phrase": "«Ты специально затянул согласование, чтобы показать, кто здесь принимает решения»",
-      "conflictogens": ["motive_judgments", "hierarchy"],
-      "note": "Приписывается намерение продемонстрировать власть (motive_judgments), при этом сама формулировка строит конфликт вокруг статуса и права принимать решения (hierarchy)."
+      "conflictogens": [
+        "motive_judgments",
+        "hierarchy"
+      ],
+      "domain": "work",
+      "note": "Приписывается намерение продемонстрировать власть (motive_judgments), при этом сама формулировка строит конфликт вокруг статуса и права принимать решения (hierarchy).",
+      "subject": "deadlines"
     },
     {
       "id": 58,
       "phrase": "«После твоего комментария на общем созвоне мне было стыдно; надеюсь, теперь ты понимаешь, что так людей не подставляют»",
-      "conflictogens": ["accusation_shame"],
-      "note": "Описание собственного чувства допустимо, но «надеюсь, теперь понимаешь, что так людей не подставляют» переводит его в обвинение и попытку вызвать вину/стыд (accusation_shame)."
+      "conflictogens": [
+        "accusation_shame"
+      ],
+      "domain": "work",
+      "note": "Описание собственного чувства допустимо, но «надеюсь, теперь понимаешь, что так людей не подставляют» переводит его в обвинение и попытку вызвать вину/стыд (accusation_shame).",
+      "subject": "meetings"
     },
     {
       "id": 59,
       "phrase": "«По коммуникации у тебя два из пяти: ты слишком резкий человек»",
-      "conflictogens": ["ratings", "personal_judgments"],
-      "note": "«Два из пяти» — оценка по шкале (ratings); «резкий человек» — характеристика личности вместо конкретного поведения (personal_judgments)."
+      "conflictogens": [
+        "ratings",
+        "personal_judgments"
+      ],
+      "domain": "work",
+      "note": "«Два из пяти» — оценка по шкале (ratings); «резкий человек» — характеристика личности вместо конкретного поведения (personal_judgments).",
+      "subject": "teamwork"
     },
     {
       "id": 60,
       "phrase": "«Пять из пяти за настойчивость — ещё бы научиться слышать ответы»",
-      "conflictogens": ["ratings", "aggression"],
-      "note": "«Пять из пяти» — оценка по шкале (ratings); вторая часть обесценивает похвалу саркастическим уколом (aggression)."
+      "conflictogens": [
+        "ratings",
+        "aggression"
+      ],
+      "domain": "work",
+      "note": "«Пять из пяти» — оценка по шкале (ratings); вторая часть обесценивает похвалу саркастическим уколом (aggression).",
+      "subject": "teamwork"
     },
     {
       "id": 61,
       "phrase": "«Все уже поняли, кроме тебя; мне правда нужно объяснять это ещё раз?»",
-      "conflictogens": ["accusation_shame", "aggression"],
-      "note": "Сравнение с группой создаёт давление и стыд (accusation_shame), а риторический вопрос звучит как агрессивное унижение (aggression)."
+      "conflictogens": [
+        "accusation_shame",
+        "aggression"
+      ],
+      "domain": "work",
+      "note": "Сравнение с группой создаёт давление и стыд (accusation_shame), а риторический вопрос звучит как агрессивное унижение (aggression).",
+      "subject": "teamwork"
     },
     {
       "id": 62,
       "phrase": "«Ты как обычно выбрал самый безопасный вариант, потому что боишься отвечать за риск»",
-      "conflictogens": ["generalization", "motive_judgments"],
-      "note": "«Как обычно» — генерализация (generalization); «боишься отвечать» — приписывание внутренней причины поведения (motive_judgments)."
+      "conflictogens": [
+        "generalization",
+        "motive_judgments"
+      ],
+      "domain": "work",
+      "note": "«Как обычно» — генерализация (generalization); «боишься отвечать» — приписывание внутренней причины поведения (motive_judgments).",
+      "subject": "code_quality"
     },
     {
       "id": 63,
       "phrase": "«Мне неинтересно, как ты это видишь: решение принято руководством»",
-      "conflictogens": ["hierarchy", "aggression"],
-      "note": "Апелляция к власти руководства закрывает равноправное обсуждение (hierarchy), а «мне неинтересно» — резкое обесценивающее высказывание (aggression)."
+      "conflictogens": [
+        "hierarchy",
+        "aggression"
+      ],
+      "domain": "work",
+      "note": "Апелляция к власти руководства закрывает равноправное обсуждение (hierarchy), а «мне неинтересно» — резкое обесценивающее высказывание (aggression).",
+      "subject": "hierarchy"
     },
     {
       "id": 64,
       "phrase": "«Твоя работа отличная — девять из десяти; видно, что ты хотел впечатлить руководство»",
-      "conflictogens": ["ratings", "motive_judgments"],
-      "note": "Позитивная оценка «девять из десяти» остаётся rating (ratings), а «хотел впечатлить» — предположение о мотиве (motive_judgments)."
+      "conflictogens": [
+        "ratings",
+        "motive_judgments"
+      ],
+      "domain": "work",
+      "note": "Позитивная оценка «девять из десяти» остаётся rating (ratings), а «хотел впечатлить» — предположение о мотиве (motive_judgments).",
+      "subject": "meetings"
     },
     {
       "id": 65,
       "phrase": "«После двух переносов срока ты снова обещаешь пятницу — тебе самому не стыдно?»",
-      "conflictogens": ["accusation_shame"],
-      "note": "Два переноса — конкретный факт, но вопрос «тебе самому не стыдно?» прямо пытается вызвать стыд (accusation_shame)."
+      "conflictogens": [
+        "accusation_shame"
+      ],
+      "domain": "work",
+      "note": "Два переноса — конкретный факт, но вопрос «тебе самому не стыдно?» прямо пытается вызвать стыд (accusation_shame).",
+      "subject": "deadlines"
     },
     {
       "id": 66,
       "phrase": "«Для аналитика ты слишком поверхностный: в отчёте нет разбивки по сегментам»",
-      "conflictogens": ["personal_judgments"],
-      "note": "Отсутствие разбивки — наблюдаемый факт, но «слишком поверхностный» характеризует человека (personal_judgments)."
+      "conflictogens": [
+        "personal_judgments"
+      ],
+      "domain": "work",
+      "note": "Отсутствие разбивки — наблюдаемый факт, но «слишком поверхностный» характеризует человека (personal_judgments).",
+      "subject": "meetings"
     },
     {
       "id": 67,
       "phrase": "«Я бы оценил это решение на восемь из десяти: два балла снимаю за отсутствие плана отката»",
-      "conflictogens": ["ratings"],
-      "note": "Даже с объяснением критериев здесь выставляется балльная оценка, хотя её не запрашивали (ratings)."
+      "conflictogens": [
+        "ratings"
+      ],
+      "domain": "work",
+      "note": "Даже с объяснением критериев здесь выставляется балльная оценка, хотя её не запрашивали (ratings).",
+      "subject": "code_quality"
     },
     {
       "id": 68,
       "phrase": "«Ты же младший разработчик — сначала научись делать без ошибок, потом спорь с архитектурой»",
-      "conflictogens": ["hierarchy", "accusation_shame"],
-      "note": "Статус «младший разработчик» используется для ограничения права спорить (hierarchy), а «сначала научись делать без ошибок» унижает и стыдит за ошибки (accusation_shame)."
+      "conflictogens": [
+        "hierarchy",
+        "accusation_shame"
+      ],
+      "domain": "work",
+      "note": "Статус «младший разработчик» используется для ограничения права спорить (hierarchy), а «сначала научись делать без ошибок» унижает и стыдит за ошибки (accusation_shame).",
+      "subject": "hierarchy"
     },
     {
       "id": 69,
       "phrase": "«Команда снова ждала тебя с ревью; похоже, чужое время для тебя просто ничего не стоит»",
-      "conflictogens": ["generalization", "motive_judgments"],
-      "note": "«Снова» формирует повторяемый паттерн (generalization); «чужое время ничего не стоит» приписывает отношение/мотив (motive_judgments)."
+      "conflictogens": [
+        "generalization",
+        "motive_judgments"
+      ],
+      "domain": "work",
+      "note": "«Снова» формирует повторяемый паттерн (generalization); «чужое время ничего не стоит» приписывает отношение/мотив (motive_judgments).",
+      "subject": "teamwork"
     },
     {
       "id": 70,
       "phrase": "«Я не понимаю, как можно было пропустить такую очевидную ошибку — это уровень новичка»",
-      "conflictogens": ["hierarchy", "personal_judgments"],
-      "note": "«Уровень новичка» ранжирует собеседника из позиции превосходства (hierarchy) и переносит обсуждение ошибки на его компетентностную характеристику (personal_judgments)."
+      "conflictogens": [
+        "hierarchy",
+        "personal_judgments"
+      ],
+      "domain": "work",
+      "note": "«Уровень новичка» ранжирует собеседника из позиции превосходства (hierarchy) и переносит обсуждение ошибки на его компетентностную характеристику (personal_judgments).",
+      "subject": "code_quality"
     },
     {
       "id": 71,
       "phrase": "«Поздравляю: благодаря тебе у нас теперь ещё один вечер с хотфиксом»",
-      "conflictogens": ["accusation_shame", "aggression"],
-      "note": "«Благодаря тебе» персонализирует вину за неприятные последствия (accusation_shame), а «поздравляю» используется саркастически (aggression)."
+      "conflictogens": [
+        "accusation_shame",
+        "aggression"
+      ],
+      "domain": "work",
+      "note": "«Благодаря тебе» персонализирует вину за неприятные последствия (accusation_shame), а «поздравляю» используется саркастически (aggression).",
+      "subject": "deadlines"
     },
     {
       "id": 72,
       "phrase": "«Твоя коммуникация на четыре из пяти: иногда ты всё-таки умеешь слушать»",
-      "conflictogens": ["ratings", "personal_judgments"],
-      "note": "«Четыре из пяти» — rating (ratings); «умеешь слушать» подаётся как общая способность человека, а не конкретное наблюдение (personal_judgments)."
+      "conflictogens": [
+        "ratings",
+        "personal_judgments"
+      ],
+      "domain": "work",
+      "note": "«Четыре из пяти» — rating (ratings); «умеешь слушать» подаётся как общая способность человека, а не конкретное наблюдение (personal_judgments).",
+      "subject": "teamwork"
     },
     {
       "id": 73,
       "phrase": "«Я вижу, ты снова споришь просто ради внимания»",
-      "conflictogens": ["generalization", "motive_judgments"],
-      "note": "«Снова» задаёт повторяемость (generalization), а «ради внимания» — непроверенный мотив (motive_judgments)."
+      "conflictogens": [
+        "generalization",
+        "motive_judgments"
+      ],
+      "domain": "work",
+      "note": "«Снова» задаёт повторяемость (generalization), а «ради внимания» — непроверенный мотив (motive_judgments).",
+      "subject": "teamwork"
     },
     {
       "id": 74,
       "phrase": "«Когда руководитель просит отчёт, не обсуждают, нужен он или нет — его делают»",
-      "conflictogens": ["hierarchy"],
-      "note": "Право на обсуждение отменяется исключительно на основании роли руководителя, что является иерархической коммуникацией (hierarchy)."
+      "conflictogens": [
+        "hierarchy"
+      ],
+      "domain": "work",
+      "note": "Право на обсуждение отменяется исключительно на основании роли руководителя, что является иерархической коммуникацией (hierarchy).",
+      "subject": "hierarchy"
     },
     {
       "id": 75,
       "phrase": "«Из-за твоей оценки сроков мы выглядели несобранно перед заказчиком — тебе должно быть стыдно»",
-      "conflictogens": ["accusation_shame"],
-      "note": "Фраза переводит обсуждение ошибки в прямое требование испытывать стыд (accusation_shame)."
+      "conflictogens": [
+        "accusation_shame"
+      ],
+      "domain": "work",
+      "note": "Фраза переводит обсуждение ошибки в прямое требование испытывать стыд (accusation_shame).",
+      "subject": "deadlines"
     },
     {
       "id": 76,
       "phrase": "«С таким отношением к деталям неудивительно, что у тебя вечно что-то ломается»",
-      "conflictogens": ["personal_judgments", "generalization"],
-      "note": "«Отношение к деталям» подано как характеристика человека (personal_judgments), а «вечно что-то ломается» — генерализация (generalization)."
+      "conflictogens": [
+        "personal_judgments",
+        "generalization"
+      ],
+      "domain": "work",
+      "note": "«Отношение к деталям» подано как характеристика человека (personal_judgments), а «вечно что-то ломается» — генерализация (generalization).",
+      "subject": "code_quality"
     },
     {
       "id": 77,
       "phrase": "«За презентацию — зачёт, но я-то знаю, что половину работы за тебя сделал дизайнер»",
-      "conflictogens": ["ratings", "accusation_shame"],
-      "note": "«Зачёт» — внешняя оценка (ratings), а вторая часть публично/лично обесценивает вклад и создаёт почву для стыда (accusation_shame)."
+      "conflictogens": [
+        "ratings",
+        "accusation_shame"
+      ],
+      "domain": "work",
+      "note": "«Зачёт» — внешняя оценка (ratings), а вторая часть публично/лично обесценивает вклад и создаёт почву для стыда (accusation_shame).",
+      "subject": "meetings"
     },
     {
       "id": 78,
       "phrase": "«Ты попросил перенести дедлайн, потому что просто не умеешь планировать»",
-      "conflictogens": ["motive_judgments", "personal_judgments"],
-      "note": "Причина просьбы выводится без проверки (motive_judgments), а «не умеешь планировать» — обобщённое суждение о способности человека (personal_judgments)."
+      "conflictogens": [
+        "motive_judgments",
+        "personal_judgments"
+      ],
+      "domain": "work",
+      "note": "Причина просьбы выводится без проверки (motive_judgments), а «не умеешь планировать» — обобщённое суждение о способности человека (personal_judgments).",
+      "subject": "deadlines"
     },
     {
       "id": 79,
       "phrase": "«На сегодняшнем созвоне ты дважды перебил меня до того, как я закончил мысль; из-за этого я потерял нить разговора»",
       "conflictogens": [],
-      "note": "Контрольный пример: конкретная ситуация, наблюдаемое поведение и его влияние без оценки личности, мотива или обобщения."
+      "domain": "work",
+      "note": "Контрольный пример: конкретная ситуация, наблюдаемое поведение и его влияние без оценки личности, мотива или обобщения.",
+      "subject": "meetings"
     },
     {
       "id": 80,
       "phrase": "«В отчёте за август нет данных по двум регионам. Давай добавим их перед отправкой заказчику»",
       "conflictogens": [],
-      "note": "Контрольный пример: назван конкретный недостаток результата и следующий шаг без конфликтогенов."
+      "domain": "work",
+      "note": "Контрольный пример: назван конкретный недостаток результата и следующий шаг без конфликтогенов.",
+      "subject": "meetings"
     },
     {
       "id": 81,
       "phrase": "«Вчера ты не ответил на мой вопрос в чате до конца рабочего дня. Что помешало ответить?»",
       "conflictogens": [],
-      "note": "Контрольный пример: факт описан без предположения о мотиве; вместо этого задан открытый вопрос."
+      "domain": "work",
+      "note": "Контрольный пример: факт описан без предположения о мотиве; вместо этого задан открытый вопрос.",
+      "subject": "teamwork"
     },
     {
       "id": 82,
       "phrase": "«Когда ты на демо показал сценарий восстановления после ошибки, заказчик сразу понял, как будет вести себя система. Для меня это было полезно»",
       "conflictogens": [],
-      "note": "Контрольный пример позитивной обратной связи: конкретное поведение и его эффект без рейтинга и приписывания мотива."
+      "domain": "work",
+      "note": "Контрольный пример позитивной обратной связи: конкретное поведение и его эффект без рейтинга и приписывания мотива.",
+      "subject": "meetings"
     },
     {
       "id": 83,
       "phrase": "«Мы договорились закрыть задачу к среде, а в четверг она всё ещё была в работе. Давай обсудим, что изменилось»",
       "conflictogens": [],
-      "note": "Контрольный пример: договорённость и факт сопоставлены конкретно, а причина не предполагается заранее."
+      "domain": "work",
+      "note": "Контрольный пример: договорённость и факт сопоставлены конкретно, а причина не предполагается заранее.",
+      "subject": "deadlines"
     },
     {
       "id": 84,
       "phrase": "«На ретро ты предложил три варианта решения и спросил мнение команды; после этого мы выбрали один подход за десять минут»",
       "conflictogens": [],
-      "note": "Контрольный пример: наблюдаемое поведение и результат описаны без общей оценки человека."
+      "domain": "work",
+      "note": "Контрольный пример: наблюдаемое поведение и результат описаны без общей оценки человека.",
+      "subject": "teamwork"
     },
     {
       "id": 85,
       "phrase": "«Я не согласен с этим архитектурным решением: при отказе второго сервиса мы теряем запрос. Можем разобрать этот сценарий?»",
       "conflictogens": [],
-      "note": "Контрольный пример: прямое несогласие само по себе не является агрессией; приведён конкретный аргумент и приглашение к обсуждению."
+      "domain": "work",
+      "note": "Контрольный пример: прямое несогласие само по себе не является агрессией; приведён конкретный аргумент и приглашение к обсуждению.",
+      "subject": "code_quality"
     },
     {
       "id": 86,
       "phrase": "«Мне было неприятно услышать эту шутку на общей встрече. Я прошу не использовать её в разговорах со мной»",
       "conflictogens": [],
-      "note": "Контрольный пример: человек описывает собственное чувство и границу без обвинения, ярлыка или предположения о намерении."
+      "domain": "work",
+      "note": "Контрольный пример: человек описывает собственное чувство и границу без обвинения, ярлыка или предположения о намерении.",
+      "subject": "meetings"
     },
     {
       "id": 87,
       "phrase": "«В этом merge request я нашёл четыре места, где не обработана ошибка сети; без обработки запрос может завершиться некорректно»",
       "conflictogens": [],
-      "note": "Контрольный пример: конкретные наблюдения и техническое последствие вместо оценки качества автора."
+      "domain": "work",
+      "note": "Контрольный пример: конкретные наблюдения и техническое последствие вместо оценки качества автора.",
+      "subject": "code_quality"
     },
     {
       "id": 88,
       "phrase": "«На встрече ты три раза посмотрел в телефон, пока обсуждался твой блок. Всё в порядке, или тебе нужно было отвлечься по срочному вопросу?»",
       "conflictogens": [],
-      "note": "Контрольный пример: наблюдение не превращается в вывод о неуважении; мотивация уточняется вопросом."
+      "domain": "work",
+      "note": "Контрольный пример: наблюдение не превращается в вывод о неуважении; мотивация уточняется вопросом.",
+      "subject": "meetings"
+    },
+    {
+      "id": 89,
+      "phrase": "«Мы договорились по очереди готовить ужин. Сегодня моя очередь, а завтра твоя»",
+      "conflictogens": [],
+      "domain": "family",
+      "note": "Контрольный пример: партнёры конкретно называют договорённость без конфликтогенов.",
+      "subject": "chores"
+    },
+    {
+      "id": 90,
+      "phrase": "«В этом месяце расходы на продукты выросли на пять тысяч рублей. Давай вместе посмотрим чеки»",
+      "conflictogens": [],
+      "domain": "family",
+      "note": "Контрольный пример: назван проверяемый факт и предложено совместное обсуждение без конфликтогенов.",
+      "subject": "money"
+    },
+    {
+      "id": 91,
+      "phrase": "«Вчера ты вернулся на час позже оговорённого времени. Что произошло?»",
+      "conflictogens": [],
+      "domain": "family",
+      "note": "Контрольный пример: родитель описывает конкретный факт и спрашивает о причине, не приписывая мотив.",
+      "subject": "time"
+    },
+    {
+      "id": 92,
+      "phrase": "«Я вижу, что по алгебре остались две несданные работы. Нужна ли тебе помощь с планом?»",
+      "conflictogens": [],
+      "domain": "family",
+      "note": "Контрольный пример: наблюдение о школьных работах отделено от оценки подростка.",
+      "subject": "parenting"
+    },
+    {
+      "id": 93,
+      "phrase": "«В субботу у меня приём у врача. Можешь забрать ребёнка с тренировки в три часа?»",
+      "conflictogens": [],
+      "domain": "family",
+      "note": "Контрольный пример: конкретная просьба о совместной заботе о ребёнке без давления и обвинений.",
+      "subject": "parenting"
+    },
+    {
+      "id": 94,
+      "phrase": "«На этой неделе родительское собрание перенесли на четверг. Кто из нас сможет пойти?»",
+      "conflictogens": [],
+      "domain": "family",
+      "note": "Контрольный пример: родители обсуждают изменение расписания и распределение задачи без конфликтогенов.",
+      "subject": "parenting"
+    },
+    {
+      "id": 95,
+      "phrase": "«Когда твоя дочь берёт мои наушники без спроса, я злюсь. Поможешь договориться о правиле?»",
+      "conflictogens": [],
+      "domain": "family",
+      "note": "Контрольный пример: в смешанной семье названы конкретное действие, чувство и просьба без ярлыков.",
+      "subject": "parenting"
+    },
+    {
+      "id": 96,
+      "phrase": "«Я хочу проводить время с твоим сыном, но ему пока неловко оставаться со мной вдвоём. Давай не будем торопить его»",
+      "conflictogens": [],
+      "domain": "family",
+      "note": "Контрольный пример: потребности членов смешанной семьи признаны без оценки личности или мотива.",
+      "subject": "parenting"
+    },
+    {
+      "id": 97,
+      "phrase": "«За ужином ты ответил на три сообщения, и мне не хватило разговора с тобой. Отложим телефоны на двадцать минут?»",
+      "conflictogens": [],
+      "domain": "family",
+      "note": "Контрольный пример: конкретное использование телефона и его эффект описаны без обобщения и обвинения.",
+      "subject": "emotional"
+    },
+    {
+      "id": 98,
+      "phrase": "«До начала уроков осталось двадцать минут, а игра ещё открыта. Когда тебе удобно её сохранить и выйти?»",
+      "conflictogens": [],
+      "domain": "family",
+      "note": "Контрольный пример: родитель обозначает время и задаёт вопрос о переходе без иерархического давления.",
+      "subject": "parenting"
+    },
+    {
+      "id": 99,
+      "phrase": "«На этой неделе я дважды возил папу к врачу. Можешь взять следующую поездку?»",
+      "conflictogens": [],
+      "domain": "family",
+      "note": "Контрольный пример: взрослый ребёнок называет свой вклад в уход за родителем и формулирует конкретную просьбу.",
+      "subject": "relatives"
+    },
+    {
+      "id": 100,
+      "phrase": "«Мама попросила помочь ей с оплатой счетов. Давайте втроём решим, кто и когда сможет это делать»",
+      "conflictogens": [],
+      "domain": "family",
+      "note": "Контрольный пример: семейная задача по уходу обсуждается совместно и без конфликтогенов.",
+      "subject": "relatives"
+    },
+    {
+      "id": 101,
+      "phrase": "«Ты всегда оставляешь всю уборку на меня»",
+      "conflictogens": [
+        "generalization"
+      ],
+      "domain": "family",
+      "note": "Слово «всегда» превращает разговор о домашних делах в обобщение (generalization).",
+      "subject": "chores"
+    },
+    {
+      "id": 102,
+      "phrase": "«Ты никогда не рассказываешь, как прошёл твой день»",
+      "conflictogens": [
+        "generalization"
+      ],
+      "domain": "family",
+      "note": "Маркер «никогда» заявляет постоянный паттерн вместо конкретного случая (generalization).",
+      "subject": "emotional"
+    },
+    {
+      "id": 103,
+      "phrase": "«Ты постоянно откладываешь домашнее задание до ночи»",
+      "conflictogens": [
+        "generalization"
+      ],
+      "domain": "family",
+      "note": "«Постоянно» — прямой маркер обобщения поведения подростка (generalization).",
+      "subject": "parenting"
+    },
+    {
+      "id": 104,
+      "phrase": "«После выходных у вас вечно меняется время, когда забирать ребёнка»",
+      "conflictogens": [
+        "generalization"
+      ],
+      "domain": "family",
+      "note": "«Вечно» создаёт обобщение о договорённостях второго родителя (generalization).",
+      "subject": "parenting"
+    },
+    {
+      "id": 105,
+      "phrase": "«Как только мы садимся смотреть фильм, ты всякий раз берёшь телефон»",
+      "conflictogens": [
+        "generalization"
+      ],
+      "domain": "family",
+      "note": "«Всякий раз» приписывает поведению неизменную повторяемость (generalization).",
+      "subject": "time"
+    },
+    {
+      "id": 106,
+      "phrase": "«Когда бабушке нужна помощь, брат опять всё перекладывает на меня»",
+      "conflictogens": [
+        "generalization"
+      ],
+      "domain": "family",
+      "note": "«Опять всё» обобщает распределение помощи бабушке по нескольким ситуациям (generalization).",
+      "subject": "relatives"
+    },
+    {
+      "id": 107,
+      "phrase": "«Из-за тебя наш семейный отпуск превратился в сплошной стресс»",
+      "conflictogens": [
+        "accusation_shame"
+      ],
+      "domain": "family",
+      "note": "«Из-за тебя» возлагает на партнёра общую вину за неудачный отпуск (accusation_shame).",
+      "subject": "time"
+    },
+    {
+      "id": 108,
+      "phrase": "«Тебе не стыдно, что бабушка сама звонила поздравить тебя?»",
+      "conflictogens": [
+        "accusation_shame"
+      ],
+      "domain": "family",
+      "note": "Вопрос «тебе не стыдно» прямо требует от подростка испытывать стыд (accusation_shame).",
+      "subject": "relatives"
+    },
+    {
+      "id": 109,
+      "phrase": "«Ты подвёл ребёнка, когда отменил встречу в последний момент»",
+      "conflictogens": [
+        "accusation_shame"
+      ],
+      "domain": "family",
+      "note": "«Ты подвёл ребёнка» персонализирует вину и давит на чувство стыда второго родителя (accusation_shame).",
+      "subject": "parenting"
+    },
+    {
+      "id": 110,
+      "phrase": "«После всего, что отчим для тебя сделал, мог бы хотя бы поблагодарить его»",
+      "conflictogens": [
+        "accusation_shame"
+      ],
+      "domain": "family",
+      "note": "Ссылка на долг за сделанное вызывает вину и стыд вместо обсуждения конкретной благодарности (accusation_shame).",
+      "subject": "relatives"
+    },
+    {
+      "id": 111,
+      "phrase": "«Пока ты сидел в игре, я одна укладывала детей — совесть у тебя есть?»",
+      "conflictogens": [
+        "accusation_shame"
+      ],
+      "domain": "family",
+      "note": "Риторическое «совесть у тебя есть?» превращает факт в попытку пристыдить партнёра (accusation_shame).",
+      "subject": "parenting"
+    },
+    {
+      "id": 112,
+      "phrase": "«Ну да, конечно, твоя усталость важнее моей»",
+      "conflictogens": [
+        "aggression"
+      ],
+      "domain": "family",
+      "note": "Саркастическое «ну да, конечно» — форма пассивной агрессии (aggression).",
+      "subject": "emotional"
+    },
+    {
+      "id": 113,
+      "phrase": "«Ещё раз хлопнешь дверью — неделю никуда не выйдешь!»",
+      "conflictogens": [
+        "aggression"
+      ],
+      "domain": "family",
+      "note": "Резкая угроза наказанием выражает открытую агрессию (aggression).",
+      "subject": "emotional"
+    },
+    {
+      "id": 114,
+      "phrase": "«Спасибо, что предупредил о смене выходных аж после приезда ребёнка»",
+      "conflictogens": [
+        "aggression"
+      ],
+      "domain": "family",
+      "note": "Нарочитая благодарность и «аж после» образуют саркастическую пассивную агрессию (aggression).",
+      "subject": "parenting"
+    },
+    {
+      "id": 115,
+      "phrase": "«Передай своей дочери, что я не собираюсь убирать за ней»",
+      "conflictogens": [
+        "aggression"
+      ],
+      "domain": "family",
+      "note": "Передача претензии через партнёра вместо прямого разговора вовлекает третью сторону и является пассивной агрессией (aggression).",
+      "subject": "parenting"
+    },
+    {
+      "id": 116,
+      "phrase": "«Прекрасно, ещё один вечер каждый смотрит в свой экран»",
+      "conflictogens": [
+        "aggression"
+      ],
+      "domain": "family",
+      "note": "Слово «прекрасно» используется как саркастический укол, то есть пассивная агрессия (aggression).",
+      "subject": "time"
+    },
+    {
+      "id": 117,
+      "phrase": "«Ты безответственный партнёр: забыл оплатить интернет»",
+      "conflictogens": [
+        "personal_judgments"
+      ],
+      "domain": "family",
+      "note": "«Безответственный партнёр» — ярлык о личности вместо обсуждения пропущенного платежа (personal_judgments).",
+      "subject": "money"
+    },
+    {
+      "id": 118,
+      "phrase": "«Ты слишком ленивый, чтобы собрать вещи в школу с вечера»",
+      "conflictogens": [
+        "personal_judgments"
+      ],
+      "domain": "family",
+      "note": "«Ленивый» — суждение о личном качестве подростка (personal_judgments).",
+      "subject": "parenting"
+    },
+    {
+      "id": 119,
+      "phrase": "«Ты ненадёжный отец: сегодня не позвонил ребёнку»",
+      "conflictogens": [
+        "personal_judgments"
+      ],
+      "domain": "family",
+      "note": "«Ненадёжный отец» оценивает личность, а не конкретный пропущенный звонок (personal_judgments).",
+      "subject": "parenting"
+    },
+    {
+      "id": 120,
+      "phrase": "«Твоя мать очень навязчивая, раз снова пришла без звонка»",
+      "conflictogens": [
+        "personal_judgments"
+      ],
+      "domain": "family",
+      "note": "«Навязчивая» — характеристика человека вместо обсуждения визита без предупреждения (personal_judgments).",
+      "subject": "relatives"
+    },
+    {
+      "id": 121,
+      "phrase": "«Мой брат эгоистичный: отказался дежурить у папы в пятницу»",
+      "conflictogens": [
+        "personal_judgments"
+      ],
+      "domain": "family",
+      "note": "«Эгоистичный» — личностный ярлык, не описание конкретного отказа (personal_judgments).",
+      "subject": "relatives"
+    },
+    {
+      "id": 122,
+      "phrase": "«Я глава семьи, поэтому бюджет будем вести так, как я решил»",
+      "conflictogens": [
+        "hierarchy"
+      ],
+      "domain": "family",
+      "note": "Статус «глава семьи» используется для одностороннего решения между партнёрами (hierarchy).",
+      "subject": "money"
+    },
+    {
+      "id": 123,
+      "phrase": "«Пока ты живёшь в моём доме, твоё мнение о времени возвращения не обсуждается»",
+      "conflictogens": [
+        "hierarchy"
+      ],
+      "domain": "family",
+      "note": "Право владельца дома используется для отмены диалога с подростком из позиции сверху (hierarchy).",
+      "subject": "time"
+    },
+    {
+      "id": 124,
+      "phrase": "«Я мать, мне лучше знать, с кем тебе дружить»",
+      "conflictogens": [
+        "hierarchy"
+      ],
+      "domain": "family",
+      "note": "Родительский статус объявлен достаточным основанием решать за подростка (hierarchy).",
+      "subject": "parenting"
+    },
+    {
+      "id": 125,
+      "phrase": "«Я родной отец, а ты отчим, поэтому правила для сына устанавливаю я»",
+      "conflictogens": [
+        "hierarchy"
+      ],
+      "domain": "family",
+      "note": "Биологическое родство используется как ранг, лишающий отчима права участвовать в обсуждении (hierarchy).",
+      "subject": "parenting"
+    },
+    {
+      "id": 126,
+      "phrase": "«Я старшая сестра, поэтому сама решу, как мы будем ухаживать за мамой»",
+      "conflictogens": [
+        "hierarchy"
+      ],
+      "domain": "family",
+      "note": "Возраст и положение старшей сестры превращаются в основание единолично командовать (hierarchy).",
+      "subject": "relatives"
+    },
+    {
+      "id": 127,
+      "phrase": "«Ты задержался на работе, потому что не хотел проводить вечер со мной»",
+      "conflictogens": [
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "«Не хотел проводить вечер со мной» без проверки приписывает партнёру мотив (motive_judgments).",
+      "subject": "emotional"
+    },
+    {
+      "id": 128,
+      "phrase": "«Ты закрылся в комнате специально, чтобы мы волновались»",
+      "conflictogens": [
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "«Специально, чтобы мы волновались» утверждает непроверенное намерение подростка (motive_judgments).",
+      "subject": "emotional"
+    },
+    {
+      "id": 129,
+      "phrase": "«Ты просишь поменяться выходными только ради удобства своей новой семьи»",
+      "conflictogens": [
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "«Только ради удобства» приписывает второму родителю мотив просьбы без уточнения (motive_judgments).",
+      "subject": "time"
+    },
+    {
+      "id": 130,
+      "phrase": "«Ты купил дочери подарок, чтобы она выбрала тебя, а не меня»",
+      "conflictogens": [
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "Цель подарка — повлиять на выбор ребёнка — заявлена как факт без проверки (motive_judgments).",
+      "subject": "parenting"
+    },
+    {
+      "id": 131,
+      "phrase": "«Ты не отвечал в семейном чате, потому что тебе безразлично здоровье папы»",
+      "conflictogens": [
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "Молчание объясняется непроверенным безразличием к отцу (motive_judgments).",
+      "subject": "relatives"
+    },
+    {
+      "id": 132,
+      "phrase": "«За наше свидание сегодня ставлю семь из десяти»",
+      "conflictogens": [
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«Семь из десяти» — незапрошенная балльная оценка совместного времени (ratings).",
+      "subject": "emotional"
+    },
+    {
+      "id": 133,
+      "phrase": "«За порядок в комнате тебе сегодня четвёрка»",
+      "conflictogens": [
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«Четвёрка» оценивает результат подростка по школьной шкале (ratings).",
+      "subject": "chores"
+    },
+    {
+      "id": 134,
+      "phrase": "«Как родитель на этой неделе ты справился на три с плюсом»",
+      "conflictogens": [
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«На три с плюсом» — внешняя оценка родительского участия (ratings).",
+      "subject": "parenting"
+    },
+    {
+      "id": 135,
+      "phrase": "«Твой вклад в отношения с пасынком — пять баллов из десяти»",
+      "conflictogens": [
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«Пять баллов из десяти» ранжирует вклад партнёра по произвольной шкале (ratings).",
+      "subject": "parenting"
+    },
+    {
+      "id": 136,
+      "phrase": "«За помощь дедушке в этом месяце брату зачёт, а тебе незачёт»",
+      "conflictogens": [
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«Зачёт» и «незачёт» — незапрошенные оценки семейной помощи (ratings).",
+      "subject": "relatives"
+    },
+    {
+      "id": 137,
+      "phrase": "«Ты всегда заставляешь меня краснеть перед детьми своими опозданиями»",
+      "conflictogens": [
+        "generalization",
+        "accusation_shame"
+      ],
+      "domain": "family",
+      "note": "«Всегда» задаёт обобщение (generalization), а «заставляешь меня краснеть перед детьми» возлагает вину и вызывает стыд (accusation_shame).",
+      "subject": "parenting"
+    },
+    {
+      "id": 138,
+      "phrase": "«Ну конечно, ты никогда не замечаешь полную корзину белья»",
+      "conflictogens": [
+        "generalization",
+        "aggression"
+      ],
+      "domain": "family",
+      "note": "«Никогда» — обобщение (generalization), а «ну конечно» передаёт саркастическую агрессию (aggression).",
+      "subject": "chores"
+    },
+    {
+      "id": 139,
+      "phrase": "«Ты всегда такой невнимательный, когда я рассказываю о работе»",
+      "conflictogens": [
+        "generalization",
+        "personal_judgments"
+      ],
+      "domain": "family",
+      "note": "«Всегда» обобщает поведение (generalization), а «невнимательный» оценивает личное качество (personal_judgments).",
+      "subject": "emotional"
+    },
+    {
+      "id": 140,
+      "phrase": "«Ты постоянно споришь, хотя я старше и лучше знаю, как решать семейные вопросы»",
+      "conflictogens": [
+        "generalization",
+        "hierarchy"
+      ],
+      "domain": "family",
+      "note": "«Постоянно» — обобщение (generalization), а старшинство используется как позиция превосходства (hierarchy).",
+      "subject": "emotional"
+    },
+    {
+      "id": 141,
+      "phrase": "«Ты каждый раз молчишь за ужином, потому что хочешь меня наказать»",
+      "conflictogens": [
+        "generalization",
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "«Каждый раз» обобщает повторяемость (generalization), а «хочешь меня наказать» приписывает мотив (motive_judgments).",
+      "subject": "emotional"
+    },
+    {
+      "id": 142,
+      "phrase": "«Ты никогда не планируешь наши выходные лучше, чем на троечку»",
+      "conflictogens": [
+        "generalization",
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«Никогда» — обобщение (generalization), а «на троечку» — балльная оценка (ratings).",
+      "subject": "time"
+    },
+    {
+      "id": 143,
+      "phrase": "«Тебе должно быть стыдно, и не смей сейчас уходить от разговора!»",
+      "conflictogens": [
+        "accusation_shame",
+        "aggression"
+      ],
+      "domain": "family",
+      "note": "«Должно быть стыдно» прямо стыдит (accusation_shame), а «не смей» звучит как агрессивная угроза (aggression).",
+      "subject": "emotional"
+    },
+    {
+      "id": 144,
+      "phrase": "«Ты бессердечный: из-за тебя мама встречала праздник одна»",
+      "conflictogens": [
+        "accusation_shame",
+        "personal_judgments"
+      ],
+      "domain": "family",
+      "note": "«Из-за тебя» возлагает вину (accusation_shame), а «бессердечный» является личностным ярлыком (personal_judgments).",
+      "subject": "relatives"
+    },
+    {
+      "id": 145,
+      "phrase": "«Я твой отец, и тебе должно быть стыдно перечить мне при гостях»",
+      "conflictogens": [
+        "accusation_shame",
+        "hierarchy"
+      ],
+      "domain": "family",
+      "note": "«Должно быть стыдно» вызывает стыд (accusation_shame), а статус отца используется для требования подчинения (hierarchy).",
+      "subject": "emotional"
+    },
+    {
+      "id": 146,
+      "phrase": "«Ты не пришёл на концерт дочери нарочно, чтобы выставить меня плохим родителем»",
+      "conflictogens": [
+        "accusation_shame",
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "«Выставить меня плохим родителем» создаёт обвинение и стыд (accusation_shame), а «нарочно» приписывает намерение (motive_judgments).",
+      "subject": "parenting"
+    },
+    {
+      "id": 147,
+      "phrase": "«За заботу о семье тебе сегодня двойка — мог бы и постыдиться»",
+      "conflictogens": [
+        "accusation_shame",
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«Мог бы и постыдиться» требует стыда (accusation_shame), а «двойка» является оценкой (ratings).",
+      "subject": "emotional"
+    },
+    {
+      "id": 148,
+      "phrase": "«Ну ты и неряха, даже кружку за собой убрать не можешь»",
+      "conflictogens": [
+        "aggression",
+        "personal_judgments"
+      ],
+      "domain": "family",
+      "note": "Насмешливая конструкция «ну ты и» выражает агрессию (aggression), а «неряха» — личностный ярлык (personal_judgments).",
+      "subject": "chores"
+    },
+    {
+      "id": 149,
+      "phrase": "«Замолчи и слушай: пока я плачу за квартиру, решаю здесь я»",
+      "conflictogens": [
+        "aggression",
+        "hierarchy"
+      ],
+      "domain": "family",
+      "note": "«Замолчи» — агрессивный приказ (aggression), а финансовый вклад используется для установления власти (hierarchy).",
+      "subject": "money"
+    },
+    {
+      "id": 150,
+      "phrase": "«Очень удобно забыть о годовщине, чтобы не тратиться на подарок»",
+      "conflictogens": [
+        "aggression",
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "«Очень удобно» звучит саркастически (aggression), а экономия на подарке заявлена как непроверенный мотив (motive_judgments).",
+      "subject": "money"
+    },
+    {
+      "id": 151,
+      "phrase": "«Блестяще справился с укладыванием: два балла из десяти»",
+      "conflictogens": [
+        "aggression",
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«Блестяще» употреблено саркастически (aggression), а «два балла из десяти» — оценка (ratings).",
+      "subject": "parenting"
+    },
+    {
+      "id": 152,
+      "phrase": "«Ты ещё ребёнок и слишком незрелый, чтобы решать, когда возвращаться домой»",
+      "conflictogens": [
+        "personal_judgments",
+        "hierarchy"
+      ],
+      "domain": "family",
+      "note": "«Незрелый» оценивает личное качество (personal_judgments), а возраст используется для отмены права подростка на обсуждение (hierarchy).",
+      "subject": "time"
+    },
+    {
+      "id": 153,
+      "phrase": "«Ты упрямый и отказался знакомиться с моей женой только чтобы меня задеть»",
+      "conflictogens": [
+        "personal_judgments",
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "«Упрямый» — личностное суждение (personal_judgments), а «чтобы меня задеть» — приписанный мотив (motive_judgments).",
+      "subject": "emotional"
+    },
+    {
+      "id": 154,
+      "phrase": "«Как брат ты на троечку: слишком равнодушный к делам родителей»",
+      "conflictogens": [
+        "personal_judgments",
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«Равнодушный» характеризует личность (personal_judgments), а «на троечку» выставляет оценку (ratings).",
+      "subject": "relatives"
+    },
+    {
+      "id": 155,
+      "phrase": "«Я здесь родитель, а ты не выключаешь планшет, потому что проверяешь мои границы»",
+      "conflictogens": [
+        "hierarchy",
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "«Я здесь родитель» устанавливает позицию сверху (hierarchy), а «проверяешь мои границы» приписывает мотив (motive_judgments).",
+      "subject": "parenting"
+    },
+    {
+      "id": 156,
+      "phrase": "«Как старший в семье ставлю тебе неуд за организацию юбилея мамы»",
+      "conflictogens": [
+        "hierarchy",
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "Старшинство используется как право судить (hierarchy), а «неуд» — оценка (ratings).",
+      "subject": "relatives"
+    },
+    {
+      "id": 157,
+      "phrase": "«Ставлю тебе пять за попытку: ты предложил помощь только ради похвалы»",
+      "conflictogens": [
+        "motive_judgments",
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«Ради похвалы» приписывает мотив (motive_judgments), а «ставлю пять» — балльная оценка (ratings).",
+      "subject": "emotional"
+    },
+    {
+      "id": 158,
+      "phrase": "«Ты опять забыл забрать сына, и теперь мне стыдно перед тренером за нас обоих»",
+      "conflictogens": [
+        "generalization",
+        "accusation_shame"
+      ],
+      "domain": "family",
+      "note": "«Опять» задаёт повторяемый паттерн (generalization), а перенос стыда «за нас обоих» обвиняет второго родителя (accusation_shame).",
+      "subject": "parenting"
+    },
+    {
+      "id": 159,
+      "phrase": "«Как обычно, ты сидишь в телефоне — замечательный семейный вечер»",
+      "conflictogens": [
+        "generalization",
+        "aggression"
+      ],
+      "domain": "family",
+      "note": "«Как обычно» — обобщение (generalization), а «замечательный семейный вечер» звучит как сарказм (aggression).",
+      "subject": "time"
+    },
+    {
+      "id": 160,
+      "phrase": "«Ты вечно такой несобранный: снова не положил форму ребёнка в сумку»",
+      "conflictogens": [
+        "generalization",
+        "personal_judgments"
+      ],
+      "domain": "family",
+      "note": "«Вечно» обобщает поведение (generalization), а «несобранный» является суждением о личности (personal_judgments).",
+      "subject": "parenting"
+    },
+    {
+      "id": 161,
+      "phrase": "«Ты никогда меня не слушаешь, а я всё-таки твоя мать»",
+      "conflictogens": [
+        "generalization",
+        "hierarchy"
+      ],
+      "domain": "family",
+      "note": "«Никогда» — обобщение (generalization), а роль матери используется как аргумент для подчинения (hierarchy).",
+      "subject": "emotional"
+    },
+    {
+      "id": 162,
+      "phrase": "«Ты постоянно просишь пароль от моего телефона, потому что ищешь повод меня контролировать»",
+      "conflictogens": [
+        "generalization",
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "«Постоянно» — обобщение (generalization), а «ищешь повод контролировать» — предположение о мотиве (motive_judgments).",
+      "subject": "emotional"
+    },
+    {
+      "id": 163,
+      "phrase": "«Твои разговоры с сыном всегда максимум на три из пяти»",
+      "conflictogens": [
+        "generalization",
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«Всегда» обобщает качество разговоров (generalization), а «три из пяти» задаёт рейтинг (ratings).",
+      "subject": "parenting"
+    },
+    {
+      "id": 164,
+      "phrase": "«Тебе не совестно? Убирай этот телефон, пока я его не выбросил!»",
+      "conflictogens": [
+        "accusation_shame",
+        "aggression"
+      ],
+      "domain": "family",
+      "note": "«Не совестно?» вызывает стыд (accusation_shame), а угроза выбросить телефон является агрессией (aggression).",
+      "subject": "time"
+    },
+    {
+      "id": 165,
+      "phrase": "«Ты неблагодарная: после всего, что бабушка делает, даже не позвонила ей»",
+      "conflictogens": [
+        "accusation_shame",
+        "personal_judgments"
+      ],
+      "domain": "family",
+      "note": "Апелляция «после всего» давит на вину (accusation_shame), а «неблагодарная» — личностный ярлык (personal_judgments).",
+      "subject": "relatives"
+    },
+    {
+      "id": 166,
+      "phrase": "«Я старше, поэтому не спорь; тебе должно быть стыдно за такой тон»",
+      "conflictogens": [
+        "accusation_shame",
+        "hierarchy"
+      ],
+      "domain": "family",
+      "note": "«Должно быть стыдно» прямо стыдит (accusation_shame), а старшинство используется для запрета спора (hierarchy).",
+      "subject": "emotional"
+    },
+    {
+      "id": 167,
+      "phrase": "«Ты оставил ребёнка со мной, чтобы развлечься, и даже не чувствуешь вины»",
+      "conflictogens": [
+        "accusation_shame",
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "Требование чувствовать вину создаёт обвинение и стыд (accusation_shame), а «чтобы развлечься» приписывает мотив (motive_judgments).",
+      "subject": "parenting"
+    },
+    {
+      "id": 168,
+      "phrase": "«Как дочери тебе сегодня единица — стыдно так редко навещать отца»",
+      "conflictogens": [
+        "accusation_shame",
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«Стыдно» навязывает чувство стыда (accusation_shame), а «единица» — оценка (ratings).",
+      "subject": "relatives"
+    },
+    {
+      "id": 169,
+      "phrase": "«Гениально: такой безалаберный человек снова потерял ключи»",
+      "conflictogens": [
+        "aggression",
+        "personal_judgments"
+      ],
+      "domain": "family",
+      "note": "«Гениально» — саркастическая агрессия (aggression), а «безалаберный человек» — суждение о личности (personal_judgments).",
+      "subject": "chores"
+    },
+    {
+      "id": 170,
+      "phrase": "«Не смей обсуждать мои правила: в этом доме я взрослый»",
+      "conflictogens": [
+        "aggression",
+        "hierarchy"
+      ],
+      "domain": "family",
+      "note": "«Не смей» выражает агрессию (aggression), а возрастная роль используется для прекращения равного обсуждения (hierarchy).",
+      "subject": "emotional"
+    },
+    {
+      "id": 171,
+      "phrase": "«Можешь не притворяться заботливым — ты приехал к маме только за похвалой»",
+      "conflictogens": [
+        "aggression",
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "«Можешь не притворяться» — агрессивный выпад (aggression), а «только за похвалой» приписывает мотив (motive_judgments).",
+      "subject": "relatives"
+    },
+    {
+      "id": 172,
+      "phrase": "«Поздравляю, за разговор с подростком тебе твёрдая двойка»",
+      "conflictogens": [
+        "aggression",
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«Поздравляю» употреблено саркастически (aggression), а «твёрдая двойка» — оценка (ratings).",
+      "subject": "parenting"
+    },
+    {
+      "id": 173,
+      "phrase": "«Ты всего лишь отчим и слишком холодный, чтобы понимать, что ей сейчас нужно»",
+      "conflictogens": [
+        "personal_judgments",
+        "hierarchy"
+      ],
+      "domain": "family",
+      "note": "«Холодный» — личностное суждение (personal_judgments), а «всего лишь отчим» понижает статус в семейной иерархии (hierarchy).",
+      "subject": "relatives"
+    },
+    {
+      "id": 174,
+      "phrase": "«Ты ревнивый и проверяешь мои сообщения, потому что хочешь мной управлять»",
+      "conflictogens": [
+        "personal_judgments",
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "«Ревнивый» оценивает личное качество (personal_judgments), а «хочешь управлять» приписывает мотив (motive_judgments).",
+      "subject": "emotional"
+    },
+    {
+      "id": 175,
+      "phrase": "«Как отец ты на два из пяти: слишком легкомысленный с расписанием детей»",
+      "conflictogens": [
+        "personal_judgments",
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«Легкомысленный» — суждение о личности (personal_judgments), а «два из пяти» — рейтинг (ratings).",
+      "subject": "parenting"
+    },
+    {
+      "id": 176,
+      "phrase": "«Я твоя мать, поэтому знаю: ты выключил геолокацию, чтобы что-то скрыть»",
+      "conflictogens": [
+        "hierarchy",
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "Роль матери подаётся как безусловное превосходство в знании (hierarchy), а «чтобы что-то скрыть» приписывает мотив (motive_judgments).",
+      "subject": "parenting"
+    },
+    {
+      "id": 177,
+      "phrase": "«По шкале семейной ответственности у тебя три из десяти; я старше и могу это оценить»",
+      "conflictogens": [
+        "hierarchy",
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "Старшинство обосновывает право судить (hierarchy), а «три из десяти» — оценка (ratings).",
+      "subject": "chores"
+    },
+    {
+      "id": 178,
+      "phrase": "«За заботу о ребёнке ставлю четыре: ты стараешься только чтобы хорошо выглядеть перед учителями»",
+      "conflictogens": [
+        "motive_judgments",
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«Чтобы хорошо выглядеть» приписывает мотив (motive_judgments), а «ставлю четыре» — оценка (ratings).",
+      "subject": "parenting"
+    },
+    {
+      "id": 179,
+      "phrase": "«Ты вечно забываешь лекарства мамы — тебе должно быть стыдно за такое отношение»",
+      "conflictogens": [
+        "generalization",
+        "accusation_shame"
+      ],
+      "domain": "family",
+      "note": "«Вечно» — обобщение (generalization), а «должно быть стыдно» прямо вызывает стыд (accusation_shame).",
+      "subject": "relatives"
+    },
+    {
+      "id": 180,
+      "phrase": "«Ты опять залип в игре — от телефона тебя сегодня вообще можно оторвать?»",
+      "conflictogens": [
+        "generalization",
+        "aggression"
+      ],
+      "domain": "family",
+      "note": "«Опять» задаёт повторяемость (generalization), а риторический вопрос «тебя сегодня вообще можно оторвать?» звучит как агрессивный укол (aggression).",
+      "subject": "time"
+    },
+    {
+      "id": 181,
+      "phrase": "«Из-за тебя ребёнок плакал весь вечер; даже не пытайся сейчас оправдываться!»",
+      "conflictogens": [
+        "accusation_shame",
+        "aggression"
+      ],
+      "domain": "family",
+      "note": "«Из-за тебя» возлагает вину (accusation_shame), а запрет оправдываться в резком тоне выражает агрессию (aggression).",
+      "subject": "parenting"
+    },
+    {
+      "id": 182,
+      "phrase": "«Тебе совесть позволяет пропускать звонки от папы? Ещё раз — и я всем расскажу»",
+      "conflictogens": [
+        "accusation_shame",
+        "aggression"
+      ],
+      "domain": "family",
+      "note": "«Тебе совесть позволяет?» стыдит (accusation_shame), а угроза публично рассказать является агрессией (aggression).",
+      "subject": "relatives"
+    },
+    {
+      "id": 183,
+      "phrase": "«Ты ещё слишком инфантильный, а я родитель, поэтому решение о колледже приму сам»",
+      "conflictogens": [
+        "personal_judgments",
+        "hierarchy"
+      ],
+      "domain": "family",
+      "note": "«Инфантильный» — личностное суждение (personal_judgments), а родительская роль используется для единоличного решения (hierarchy).",
+      "subject": "parenting"
+    },
+    {
+      "id": 184,
+      "phrase": "«Ты жадный и не даёшь сестре машину только чтобы показать свою власть»",
+      "conflictogens": [
+        "personal_judgments",
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "«Жадный» — суждение о личности (personal_judgments), а «чтобы показать власть» приписывает мотив (motive_judgments).",
+      "subject": "money"
+    },
+    {
+      "id": 185,
+      "phrase": "«Как партнёр ты на троечку: совершенно ненадёжный в вопросах денег»",
+      "conflictogens": [
+        "personal_judgments",
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«Ненадёжный» оценивает личное качество (personal_judgments), а «на троечку» — рейтинг (ratings).",
+      "subject": "money"
+    },
+    {
+      "id": 186,
+      "phrase": "«Я старший сын, мне виднее: ты предлагаешь сиделку, потому что не хочешь заниматься мамой»",
+      "conflictogens": [
+        "hierarchy",
+        "motive_judgments"
+      ],
+      "domain": "family",
+      "note": "Статус старшего сына используется как позиция сверху (hierarchy), а нежелание ухаживать объявляется мотивом без проверки (motive_judgments).",
+      "subject": "relatives"
+    },
+    {
+      "id": 187,
+      "phrase": "«Как глава семьи оцениваю твоё участие в воспитании на четыре из десяти»",
+      "conflictogens": [
+        "hierarchy",
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "Позиция «главы семьи» заявляет превосходство (hierarchy), а «четыре из десяти» является оценкой (ratings).",
+      "subject": "parenting"
+    },
+    {
+      "id": 188,
+      "phrase": "«За помощь с папой тебе пять из пяти, но ясно, что ты стараешься ради наследства»",
+      "conflictogens": [
+        "motive_judgments",
+        "ratings"
+      ],
+      "domain": "family",
+      "note": "«Ради наследства» приписывает мотив (motive_judgments), а «пять из пяти» — балльная оценка (ratings).",
+      "subject": "relatives"
     }
   ]
 }

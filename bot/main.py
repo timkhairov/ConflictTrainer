@@ -54,13 +54,13 @@ async def main() -> None:
 
     # 1) Загружаем данные (при ошибке — понятное сообщение и выход)
     try:
-        conflictogens, exercises = load_all(DATA_DIR)
+        domains, subjects, conflictogens, exercises = load_all(DATA_DIR)
     except DataError as e:
         log.error("Ошибка данных:\n%s", e)
         raise SystemExit(1)
     log.info(
-        "Загружено конфликтогенов: %d, упражнений: %d",
-        len(conflictogens), len(exercises),
+        "Загружено сфер: %d, тем: %d, конфликтогенов: %d, упражнений: %d",
+        len(domains), len(subjects), len(conflictogens), len(exercises),
     )
 
     store = Store(STORAGE_DIR / "users.json")
@@ -79,6 +79,10 @@ async def main() -> None:
     dp.errors.register(on_error)
 
     # 3) Передаём данные в обработчики через workflow_data
+    dp["domains"] = domains
+    dp["domains_by_id"] = {d.id: d for d in domains}
+    dp["subjects"] = subjects
+    dp["subjects_by_id"] = {s.id: s for s in subjects}
     dp["conflictogens"] = conflictogens
     dp["conflictogens_by_id"] = {c.id: c for c in conflictogens}
     dp["exercises"] = exercises

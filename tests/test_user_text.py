@@ -161,7 +161,7 @@ def test_stats_text_missing_conflictogens_key():
 
 
 def test_feedback_header_number_free_and_phrase_kept():
-    exercise = Exercise(id=7, phrase="твоя фраза", conflictogens=("a",))
+    exercise = Exercise(id=7, phrase="твоя фраза", conflictogens=("a",), domain="work", subject="salary")
     by_id = {"a": Conflictogen(id="a", name="Н", description="деск")}
     result = ex.evaluate(exercise, ["a"])
     text = ex._format_feedback(exercise, result, by_id)
@@ -173,7 +173,7 @@ def test_feedback_header_number_free_and_phrase_kept():
 
 def test_feedback_clean_perfect():
     # контрольный пример, всё верно (ничего не отмечено)
-    exercise = Exercise(id=10, phrase="чистая фраза", conflictogens=(), note="разбор")
+    exercise = Exercise(id=10, phrase="чистая фраза", conflictogens=(), domain="work", subject="salary", note="разбор")
     by_id = {"a": Conflictogen(id="a", name="Н", description="деск")}
     result = ex.evaluate(exercise, [])
     text = ex._format_feedback(exercise, result, by_id)
@@ -185,7 +185,7 @@ def test_feedback_clean_perfect():
 
 def test_feedback_clean_false_positives():
     # контрольный пример, но пользователь отметил лишнее
-    exercise = Exercise(id=11, phrase="чистая фраза", conflictogens=(), note="")
+    exercise = Exercise(id=11, phrase="чистая фраза", conflictogens=(), domain="work", subject="salary", note="")
     by_id = {"a": Conflictogen(id="a", name="Н", description="деск")}
     result = ex.evaluate(exercise, ["a"])
     text = ex._format_feedback(exercise, result, by_id)
@@ -234,13 +234,13 @@ class FakeCall:
 
 
 def test_begin_prompt_number_free(tmp_path, monkeypatch):
-    exercises = [Exercise(id=42, phrase="фраза & тест", conflictogens=("a",))]
+    exercises = [Exercise(id=42, phrase="фраза & тест", conflictogens=("a",), domain="work", subject="salary")]
     store = Store(tmp_path / "users.json")
     monkeypatch.setattr(random, "choice", lambda seq: seq[0])
     conflictogens = [Conflictogen(id="a", name="Н", description="")]
     call = FakeCall()
     state = FakeState()
-    run(ex._begin(call, exercises, store, conflictogens, state))
+    run(ex._begin(call, exercises, store, conflictogens, state, domain_id="work", subject_id="salary"))
 
     text, kb = call.message.edits[0]
     assert text.startswith("💬 фраза &amp; тест")

@@ -6,7 +6,17 @@ import inspect
 from bot.handlers import exercise, fallback, register_all, start, stats
 
 BUILTINS = {"message", "call", "state"}
-PROVIDED = {"conflictogens", "conflictogens_by_id", "exercises", "exercises_by_id", "store"}
+PROVIDED = {
+    "domains",
+    "domains_by_id",
+    "subjects",
+    "subjects_by_id",
+    "conflictogens",
+    "conflictogens_by_id",
+    "exercises",
+    "exercises_by_id",
+    "store",
+}
 
 
 def _handler_fns(router):

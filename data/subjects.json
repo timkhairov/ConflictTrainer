@@ -1,0 +1,65 @@
+{
+  "_comment": "СПИСОК ТЕМ (субъектов) внутри каждой сферы. Поля: id — стабильный ключ (латиницей, без пробелов; используется в поле subject каждого упражнения в exercises.json и в callback'ах), name — название темы на кнопке, domain — id сферы, к которой относится тема (id из domains.json). Порядок в файле определяет порядок кнопок.",
+  "subjects": [
+    {
+      "id": "salary",
+      "name": "Зарплата и оплата",
+      "domain": "work"
+    },
+    {
+      "id": "deadlines",
+      "name": "Сроки и нагрузка",
+      "domain": "work"
+    },
+    {
+      "id": "code_quality",
+      "name": "Качество кода и решения",
+      "domain": "work"
+    },
+    {
+      "id": "meetings",
+      "name": "Встречи и отчёты",
+      "domain": "work"
+    },
+    {
+      "id": "hierarchy",
+      "name": "Иерархия и руководство",
+      "domain": "work"
+    },
+    {
+      "id": "teamwork",
+      "name": "Команда и взаимодействие",
+      "domain": "work"
+    },
+    {
+      "id": "chores",
+      "name": "Быт и дом",
+      "domain": "family"
+    },
+    {
+      "id": "parenting",
+      "name": "Дети",
+      "domain": "family"
+    },
+    {
+      "id": "money",
+      "name": "Деньги",
+      "domain": "family"
+    },
+    {
+      "id": "relatives",
+      "name": "Родные и знакомые",
+      "domain": "family"
+    },
+    {
+      "id": "time",
+      "name": "Время и отдых",
+      "domain": "family"
+    },
+    {
+      "id": "emotional",
+      "name": "Отношения и чувства",
+      "domain": "family"
+    }
+  ]
+}

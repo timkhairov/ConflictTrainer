@@ -9,7 +9,7 @@ from bot.scoring import evaluate
 
 
 def _exercise():
-    return Exercise(id=1, phrase="p", conflictogens=("a", "b", "c"), note="")
+    return Exercise(id=1, phrase="p", conflictogens=("a", "b", "c"), domain="work", subject="salary", note="")
 
 
 def test_full_selection_perfect():
@@ -49,7 +49,7 @@ def test_partial_selection_ordering():
 
 
 def test_false_positives():
-    e = Exercise(id=2, phrase="p", conflictogens=("a", "b"), note="")
+    e = Exercise(id=2, phrase="p", conflictogens=("a", "b"), domain="work", subject="salary", note="")
     r = evaluate(e, ["b", "zzz", "yyy"])
     assert "zzz" in r.false_positive
     assert "yyy" in r.false_positive
@@ -64,7 +64,7 @@ def test_false_positives():
 
 def test_clean_exercise_empty_selection_perfect():
     # контрольный пример: конфликтогенов нет, выбирать нечего
-    e = Exercise(id=10, phrase="p", conflictogens=(), note="")
+    e = Exercise(id=10, phrase="p", conflictogens=(), domain="work", subject="salary", note="")
     r = evaluate(e, [])
     assert r.perfect
     assert r.score_num == 0
@@ -75,7 +75,7 @@ def test_clean_exercise_empty_selection_perfect():
 
 
 def test_clean_exercise_selection_all_false_positive():
-    e = Exercise(id=11, phrase="p", conflictogens=(), note="")
+    e = Exercise(id=11, phrase="p", conflictogens=(), domain="work", subject="salary", note="")
     r = evaluate(e, ["a"])
     assert not r.perfect
     assert r.score_num == 0
@@ -86,7 +86,7 @@ def test_clean_exercise_selection_all_false_positive():
 
 
 def test_mixed_case_scores():
-    e = Exercise(id=3, phrase="p", conflictogens=("a", "b", "c", "d"), note="")
+    e = Exercise(id=3, phrase="p", conflictogens=("a", "b", "c", "d"), domain="work", subject="salary", note="")
     r = evaluate(e, ["a", "c", "x"])
     assert r.correct == ("a", "c")
     assert r.missed == ("b", "d")

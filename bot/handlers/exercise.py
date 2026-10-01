@@ -1,10 +1,11 @@
 """Ядро тренажёра: выдача фразы, выбор конфликтогенов, проверка и разбор.
 
-Поток: «Начать тренировку» → фраза + клавиатура выбора → отметки (toggle) →
-«Готово» → разбор ответа → «Следующее упражнение» / «В меню».
+Поток: «Начать тренировку» → выбор сферы жизни → выбор темы →
+фраза + клавиатура выбора → отметки (toggle) → «Готово» → разбор ответа →
+«Следующее упражнение» (в той же сфере и теме) / «В меню».
 
-Данные (conflictogens, exercises, store) передаются в обработчики через
-workflow_data диспетчера (см. bot/main.py).
+Данные (domains, subjects, conflictogens, exercises, store) передаются в
+обработчики через workflow_data диспетчера (см. bot/main.py).
 """
 from __future__ import annotations
 
@@ -17,14 +18,18 @@ from aiogram.types import CallbackQuery
 from aiogram.utils.text_decorations import html_decoration as html
 
 from ..keyboards import (
+    CB_DOMAIN,
     CB_MENU_START_TRAINING,
     CB_NEXT,
+    CB_SUBJECT,
     CB_SUBMIT,
     CB_TOGGLE,
+    domain_keyboard,
     exercise_keyboard,
     feedback_keyboard,
+    subject_keyboard,
 )
-from ..models import Conflictogen, Exercise
+from ..models import Conflictogen, Domain, Exercise, Subject
 from ..scoring import AttemptResult, evaluate
 from ..store import Store
 from .common import ERROR_ANSWER, fit_text, safe_edit, safe_edit_markup
@@ -66,14 +71,22 @@ def _keyboard_is_stale(call: CallbackQuery, data: dict) -> bool:
 
 
 async def _begin(call: CallbackQuery, exercises: list[Exercise], store: Store,
-                 conflictogens: list[Conflictogen], state: FSMContext) -> None:
-    """Начинает новое упражнение: обновляет сообщение на фразу + клавиатуру."""
+                 conflictogens: list[Conflictogen], state: FSMContext,
+                 domain_id: str, subject_id: str) -> None:
+    """Начинает новое упражнение: обновляет сообщение на фразу + клавиатуру.
+
+    `exercises` — уже отфильтрованный по сфере и теме список; `domain_id`
+    и `subject_id` запоминаются в состоянии, чтобы «Следующее упражнение»
+    продолжало ту же сферу и тему.
+    """
     exercise = pick_next(exercises, store, call.from_user.id)
     # Привязываем упражнение к конкретному сообщению: «старые» клавиатуры
     # от предыдущих упражнений перестанут трогать текущее состояние.
     await state.update_data(
         exercise_id=exercise.id,
         selected=[],
+        domain_id=domain_id,
+        subject_id=subject_id,
         message_id=call.message.message_id,
         chat_id=call.message.chat.id,
     )
@@ -145,19 +158,89 @@ def _format_feedback(exercise: Exercise, result: AttemptResult,
 
 
 @router.callback_query(F.data == CB_MENU_START_TRAINING)
-async def start_training(call: CallbackQuery, exercises: list[Exercise],
-                         store: Store, conflictogens: list[Conflictogen],
-                         state: FSMContext):
-    """Кнопка «Начать тренировку»."""
-    await _begin(call, exercises, store, conflictogens, state)
+async def choose_domain(call: CallbackQuery, domains: list[Domain],
+                        state: FSMContext):
+    """Кнопка «Начать тренировку»: показываем выбор сферы жизни."""
+    await state.clear()
+    try:
+        await safe_edit(
+            call,
+            "Выбери сферу жизни, в которой хочешь потренироваться:",
+            domain_keyboard(domains),
+        )
+    except Exception:
+        await call.answer(ERROR_ANSWER)
+        raise
+    await call.answer()
+
+
+@router.callback_query(F.data.startswith(CB_DOMAIN))
+async def choose_subject(call: CallbackQuery, state: FSMContext,
+                         domains_by_id: dict[str, Domain],
+                         subjects: list[Subject]):
+    """Кнопка сферы жизни: показываем выбор темы внутри этой сферы."""
+    dom_id = call.data[len(CB_DOMAIN):]
+    domain = domains_by_id.get(dom_id)
+    if domain is None:
+        # Сфера исчезла из данных, а её кнопка осталась в «старой» клавиатуре.
+        await call.answer("Сфера недоступна. Вернись в меню — /start.")
+        return
+    domain_subjects = [s for s in subjects if s.domain == dom_id]
+    if not domain_subjects:
+        await call.answer(f"В сфере «{domain.name}» пока нет тем — они скоро появятся.")
+        return
+    try:
+        await safe_edit(
+            call,
+            f"Сфера: {html.quote(domain.name)}. Выбери тему:",
+            subject_keyboard(domain_subjects),
+        )
+    except Exception:
+        await call.answer(ERROR_ANSWER)
+        raise
+    await call.answer()
+
+
+@router.callback_query(F.data.startswith(CB_SUBJECT))
+async def start_training(call: CallbackQuery, state: FSMContext,
+                         subjects_by_id: dict[str, Subject],
+                         exercises: list[Exercise],
+                         conflictogens: list[Conflictogen],
+                         store: Store):
+    """Кнопка темы: начинает тренировку упражнениями этой сферы и темы."""
+    sub_id = call.data[len(CB_SUBJECT):]
+    subject = subjects_by_id.get(sub_id)
+    if subject is None:
+        # Тема исчезла из данных, а её кнопка осталась в «старой» клавиатуре.
+        await call.answer("Тема недоступна. Вернись в меню — /start.")
+        return
+    pool = [e for e in exercises if e.domain == subject.domain and e.subject == sub_id]
+    if not pool:
+        # Проверка до pick_next: pick_next([]) падает с IndexError.
+        await call.answer(f"В теме «{subject.name}» пока нет упражнений — они скоро появятся.")
+        return
+    await _begin(call, pool, store, conflictogens, state, subject.domain, sub_id)
 
 
 @router.callback_query(F.data == CB_NEXT)
 async def next_exercise(call: CallbackQuery, exercises: list[Exercise],
                         store: Store, conflictogens: list[Conflictogen],
-                        state: FSMContext):
-    """Кнопка «Следующее упражнение»."""
-    await _begin(call, exercises, store, conflictogens, state)
+                        domains: list[Domain], state: FSMContext):
+    """Кнопка «Следующее упражнение»: продолжаем в той же сфере и теме."""
+    data = await state.get_data()
+    dom_id = data.get("domain_id")
+    sub_id = data.get("subject_id")
+    if not dom_id or not sub_id:
+        # Сфера/тема не выбраны — предлагаем выбрать заново;
+        # без fallback на все упражнения, чтобы не выпрыгивать из выбранной темы.
+        await choose_domain(call, domains, state)
+        return
+    pool = [e for e in exercises if e.domain == dom_id and e.subject == sub_id]
+    if not pool:
+        # Тема опустела (упражнения удалили) — предлагаем выбрать заново.
+        await choose_domain(call, domains, state)
+        return
+    await _begin(call, pool, store, conflictogens, state, dom_id, sub_id)
 
 
 @router.callback_query(F.data == CB_SUBMIT)
@@ -186,7 +269,11 @@ async def submit(call: CallbackQuery, exercises_by_id: dict[int, Exercise],
             call.from_user.id, exercise.id,
             result.correct, result.missed, result.false_positive,
         )
-        await state.clear()
+        # Не сбрасываем состояние целиком: domain_id нужен кнопке «Следующее
+        # упражнение», чтобы остаться в той же сфере. Само упражнение считаем
+        # закрытым (exercise_id=None) — существующие проверки toggle/submit
+        # на «нет активного упражнения» продолжают работать.
+        await state.update_data(exercise_id=None, selected=[])
         await safe_edit(call, _format_feedback(exercise, result, conflictogens_by_id),
                         feedback_keyboard())
     except Exception:

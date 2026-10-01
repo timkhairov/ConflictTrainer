@@ -114,7 +114,7 @@ def test_submit_no_active_exercise(tmp_path):
 
 def test_submit_stale_keyboard(tmp_path):
     store = Store(tmp_path / "users.json")
-    exercise = Exercise(id=1, phrase="p", conflictogens=("a",))
+    exercise = Exercise(id=1, phrase="p", conflictogens=("a",), domain="work", subject="salary")
     exercises_by_id = {1: exercise}
     # message_id в message (999) != message_id в state (111) → устаревшая
     call = FakeCall(message=FakeMessage(message_id=999, chat_id=5))
