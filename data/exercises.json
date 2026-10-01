@@ -197,10 +197,11 @@
       "phrase": "«Может, мне разжевать это в третий раз? Вы же никогда не читаете итоги встреч, которые я лично готовлю»",
       "conflictogens": [
         "generalization",
-        "hierarchy"
+        "hierarchy",
+        "aggression"
       ],
       "domain": "work",
-      "note": "«Никогда» — обобщение (generalization). «Разжевать» — учительская позиция по отношению к команде (hierarchy).",
+      "note": "«Никогда» — обобщение (generalization). «Разжевать» — учительская позиция по отношению к команде (hierarchy). Саркастический риторический вопрос звучит как пассивная агрессия (aggression).",
       "subject": "meetings"
     },
     {
@@ -332,10 +333,11 @@
       "id": 32,
       "phrase": "«Команда теперь будет разгребать последствия твоего решения — можешь этим гордиться»",
       "conflictogens": [
-        "accusation_shame"
+        "accusation_shame",
+        "aggression"
       ],
       "domain": "work",
-      "note": "Конструкция направлена на то, чтобы человеку стало стыдно за последствия («можешь этим гордиться») (accusation_shame).",
+      "note": "Конструкция направлена на то, чтобы человеку стало стыдно за последствия (accusation_shame). «Можешь этим гордиться» — саркастический укол, то есть пассивная агрессия (aggression).",
       "subject": "teamwork"
     },
     {
@@ -1197,10 +1199,11 @@
       "id": 120,
       "phrase": "«Твоя мать очень навязчивая, раз снова пришла без звонка»",
       "conflictogens": [
-        "personal_judgments"
+        "personal_judgments",
+        "generalization"
       ],
       "domain": "family",
-      "note": "«Навязчивая» — характеристика человека вместо обсуждения визита без предупреждения (personal_judgments).",
+      "note": "«Навязчивая» — характеристика человека вместо обсуждения визита без предупреждения (personal_judgments). «Снова» задаёт повторяемость поведения (generalization).",
       "subject": "relatives"
     },
     {
@@ -1720,10 +1723,11 @@
       "phrase": "«Гениально: такой безалаберный человек снова потерял ключи»",
       "conflictogens": [
         "aggression",
-        "personal_judgments"
+        "personal_judgments",
+        "generalization"
       ],
       "domain": "family",
-      "note": "«Гениально» — саркастическая агрессия (aggression), а «безалаберный человек» — суждение о личности (personal_judgments).",
+      "note": "«Гениально» — саркастическая агрессия (aggression), «безалаберный человек» — суждение о личности (personal_judgments), а «снова» задаёт повторяемость поведения (generalization).",
       "subject": "chores"
     },
     {

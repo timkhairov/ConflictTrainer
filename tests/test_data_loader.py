@@ -93,13 +93,15 @@ def test_family_exercises_real_data_quality():
     assert [exercise.id for exercise in family] == list(range(89, 189))
     assert Counter(len(exercise.conflictogens) for exercise in family) == {
         0: 12,
-        1: 36,
+        1: 35,
         2: 52,
+        3: 1,  # id 169: aggression + personal_judgments + generalization
     }
-    assert max(len(exercise.conflictogens) for exercise in family) == 2
+    assert max(len(exercise.conflictogens) for exercise in family) == 3
+    # generalization — 22: базовые 20 плюс «снова» в id 120 и 169
     assert Counter(
         cid for exercise in family for cid in exercise.conflictogens
-    ) == {cid: 20 for cid in known_ids}
+    ) == {**{cid: 20 for cid in known_ids}, "generalization": 22}
 
     phrases = [exercise.phrase.strip() for exercise in family]
     assert all(exercise.phrase == exercise.phrase.strip() for exercise in family)
